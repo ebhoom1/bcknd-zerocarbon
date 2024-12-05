@@ -12,3 +12,4 @@ const BoundarySchema = new mongoose.Schema({
 
 module.exports = mongoose.model('Boundary', BoundarySchema);
 
+
