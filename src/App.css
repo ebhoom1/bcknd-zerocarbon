@@ -1,0 +1,31 @@
+
+
+*{
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+.App{
+  height: 100vh;
+}
+body{
+  font-family: 'Poppins';
+  background-color: #F6F6F6;
+}
+
+  
+
+/* Primary Colors */
+:root {
+  --primary-bg: #35aa39;        /* Primary background color */
+  --primary-text:#4CAF50;      /* Primary text color */
+  --primary-btn-bg:#35aa39;    /* Primary button background */
+  --primary-btn-text: #ffffff;  /* Primary button text color */
+  --primary-btn-hover-bg:#45ac4a; /* Button hover color */
+  --error-color: #f44336;       /* Error text color */
+  --link-color: #ffffff;        /* Link text color */
+  --form-bg: rgba(255, 255, 255, 0.021); /* Background for form elements */
+  --form-border: rgba(255, 255, 255, 0.034); /* Border color for form elements */
+}
+
+

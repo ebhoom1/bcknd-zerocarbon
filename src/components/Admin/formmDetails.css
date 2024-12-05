@@ -1,0 +1,20 @@
+@media print {
+    .MuiButton-root {
+      display: none; /* Hide the button in the PDF */
+    }
+  
+    .MuiBox-root {
+      padding: 20px;
+      border: none; /* Remove border in the PDF */
+    }
+  
+    .MuiTypography-root {
+      font-size: 12px !important;
+    }
+  
+    .MuiGrid-root {
+      margin-bottom: 10px; /* For better readability */
+    }
+    
+  }
+  

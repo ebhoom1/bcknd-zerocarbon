@@ -1,0 +1,17 @@
+/* variables.css */
+
+/* Primary Colors */
+:root {
+    --primary-bg: #1B5293;        /* Primary background color */
+    --primary-text: #ffffff;      /* Primary text color */
+    --primary-btn-bg: #1B5293;    /* Primary button background */
+    --primary-btn-text: #ffffff;  /* Primary button text color */
+    --primary-btn-hover-bg: #0d3c75; /* Button hover color */
+    --error-color: #f44336;       /* Error text color */
+    --link-color: #ffffff;        /* Link text color */
+    --form-bg: rgba(255, 255, 255, 0.2); /* Background for form elements */
+    --form-border: rgba(255, 255, 255, 0.3); /* Border color for form elements */
+  }
+  
+  /* You can also define additional colors or theming here as needed */
+  

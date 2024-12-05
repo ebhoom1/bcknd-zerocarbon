@@ -1,0 +1,30 @@
+{
+    "Scope 1": [
+      "Stationary Combustion",
+      "Mobile Combustion",
+      "Fugitive Emissions",
+      "Process Emissions"
+    ],
+    "Scope 2": [
+      "Purchased Electricity",
+      "Purchased Steam, Heating, and Cooling"
+    ],
+    "Scope 3": [
+      "Purchased Goods and Services",
+      "Capital Goods",
+      "Fuel- and Energy-Related Activities",
+      "Upstream Transportation and Distribution",
+      "Waste Generated in Operations",
+      "Business Travel",
+      "Employee Commuting",
+      "Upstream Leased Assets",
+      "Downstream Transportation and Distribution",
+      "Processing of Sold Products",
+      "Use of Sold Products",
+      "End-of-Life Treatment of Sold Products",
+      "Downstream Leased Assets",
+      "Franchises",
+      "Investments"
+    ]
+  }
+  

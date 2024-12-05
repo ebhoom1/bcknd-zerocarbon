@@ -1,0 +1,30 @@
+{
+    "Stationary Combustion": [
+      "Diesel Generators",
+      "Natural Gas Boilers",
+      "Coal-fired Furnaces",
+      "Biomass Heaters",
+      "Oil-fired Heaters",
+      "LPG Stoves or Heaters",
+      "Steam Boilers",
+      "Cogeneration Plants",
+      "Backup Power Systems"
+    ],
+    "Purchased Electricity": [
+      "Manufacturing Plants",
+      "Office Buildings",
+      "Warehouses",
+      "Data Centers",
+      "Production Machinery",
+      "HVAC Systems",
+      "Lighting Systems",
+      "IT and Server Equipment"
+    ],
+    "Purchased Steam, Heating, and Cooling": [
+      "Heating Systems",
+      "Steam Systems",
+      "Cooling Systems"
+    ]
+    
+  }
+  

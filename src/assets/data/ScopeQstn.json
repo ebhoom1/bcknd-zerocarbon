@@ -1,0 +1,13 @@
+[{
+    "StationaryCombustion": "Do you have facilities that burn fuels on-site? (e.g., natural gas, propane, coal, fuel oil for heating, diesel fuel for backup generators, biomass fuels)?",
+    "MobileSources": "Do any vehicles owned or leased by your organization? This can include cars, trucks, propane forklifts, aircraft, and boats.",
+    "RefrigerationAndAirConditioning": "Do your facilities use refrigeration or air conditioning equipment?",
+    "ProcessEmissions": "Do your industrial processes emit GHGs?",
+    "Electricity": "Does your inventory include facilities that purchase electricity?",
+    "Steam": "Do you purchase steam for heating or cooling in your facilities?",
+    "BusinessTravel": "Do your employees travel for business using transportation other than owned or leased vehicles (e.g., commercial airline flights, rental cars, trains)?",
+    "EmployeeCommuting": "Do your employees commute to work using personal vehicles or public transportation?",
+    "UpstreamTransportationAndDistribution": "Do you hire another company to transport products or other materials to or from your facilities?",
+    "WasteGeneratedInOperations": "Do you generate waste that is disposed of in a facility owned by another organization?"
+  }]
+  

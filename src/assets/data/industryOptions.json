@@ -1,0 +1,117 @@
+[
+    {
+      "category": "Agriculture and Allied Activities",
+      "options": ["Farming", "Forestry", "Fishing", "Dairy and Animal Husbandry"]
+    },
+    {
+      "category": "Manufacturing",
+      "options": [
+        "Automotive",
+        "Electronics",
+        "Textiles",
+        "Pharmaceuticals",
+        "Chemicals and Petrochemicals",
+        "Steel and Metals",
+        "Cement",
+        "Consumer Goods (FMCG)"
+      ]
+    },
+    {
+      "category": "Retail and Wholesale Trade",
+      "options": ["E-Commerce", "Supermarkets and Hypermarkets", "Traditional Retail"]
+    },
+    {
+      "category": "Energy",
+      "options": [
+        "Power Generation (Coal, Hydro, Nuclear)",
+        "Renewable Energy (Solar, Wind, Biomass)",
+        "Oil and Gas",
+        "Energy Transmission and Distribution"
+      ]
+    },
+    {
+      "category": "Transportation and Logistics",
+      "options": [
+        "Railways",
+        "Aviation",
+        "Shipping and Ports",
+        "Logistics and Supply Chain Management",
+        "Courier and Delivery Services"
+      ]
+    },
+    {
+      "category": "Information Technology and IT-Enabled Services",
+      "options": [
+        "Software Development",
+        "IT Infrastructure",
+        "Data Centers",
+        "Business Process Outsourcing (BPO)",
+        "Knowledge Process Outsourcing (KPO)"
+      ]
+    },
+    {
+      "category": "Construction and Real Estate",
+      "options": [
+        "Infrastructure Development",
+        "Residential and Commercial Real Estate",
+        "Green Building Development"
+      ]
+    },
+    {
+      "category": "Banking, Financial Services, and Insurance (BFSI)",
+      "options": ["Banking", "Financial Services", "Insurance", "Fintech"]
+    },
+    {
+      "category": "Healthcare and Life Sciences",
+      "options": ["Hospitals and Clinics", "Medical Devices", "Biotechnology", "Pharmaceuticals"]
+    },
+    {
+      "category": "Education",
+      "options": ["Schools and Universities", "Vocational Training", "E-Learning Platforms"]
+    },
+    {
+      "category": "Media and Entertainment",
+      "options": ["Television and Radio", "Digital Content Platforms", "Film Production", "Print Media"]
+    },
+    {
+      "category": "Hospitality and Tourism",
+      "options": ["Hotels and Resorts", "Travel Agencies", "Event Management", "Ecotourism"]
+    },
+    {
+      "category": "Mining and Quarrying",
+      "options": ["Coal Mining", "Iron Ore and Bauxite Mining", "Other Minerals"]
+    },
+    {
+      "category": "Telecommunication",
+      "options": ["Mobile Network Operators", "Broadband Services", "Satellite Communications"]
+    },
+    {
+      "category": "Textiles and Apparel",
+      "options": ["Handlooms and Handicrafts", "Apparel Manufacturing", "Export-Oriented Units"]
+    },
+    {
+      "category": "Automotive and Ancillary Industries",
+      "options": ["Vehicle Manufacturing", "Auto Parts and Accessories", "Electric Vehicles (EVs)"]
+    },
+    {
+      "category": "Chemicals and Fertilizers",
+      "options": ["Industrial Chemicals", "Fertilizer Production", "Agrochemicals"]
+    },
+    {
+      "category": "Aerospace and Defense",
+      "options": ["Aircraft Manufacturing", "Defense Equipment Production", "Space Technology"]
+    },
+    {
+      "category": "Public Sector and Government Services",
+      "options": ["Government Agencies", "Public Sector Units (PSUs)", "Municipal Services"]
+    },
+    {
+      "category": "Waste Management and Recycling",
+      "options": ["Solid Waste Management", "E-Waste Recycling", "Water Treatment"]
+    },
+    {
+      "category": "Others",
+      "options": ["NGOs and Social Enterprises", "Startups", "Miscellaneous Industries"]
+    }
+  ]
+  
