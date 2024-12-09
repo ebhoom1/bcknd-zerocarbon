@@ -48,6 +48,7 @@ const formSchema = new mongoose.Schema({
   signatureName: { type: String, required: true },
   date: { type: Date, default: Date.now },
   isRead:{type:Boolean,default:false},
+  status:{type:String,default:"Not started"}
 },{timestamps:true});
 
 const Form = mongoose.model("Form", formSchema);

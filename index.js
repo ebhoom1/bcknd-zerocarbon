@@ -6,6 +6,7 @@ const bodyParser=require('body-parser');
 const userR = require("./router/userR");
 const adminR = require("./router/adminR");
 const authR=require("./router/authR");
+const flowchartR=require("./router/flowchartR");
 dotenv.config();
 
 const app = express();
@@ -16,8 +17,10 @@ app.use(express.json());
 
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use("/api/user", userR);
-app.use("/api/admin",adminR);
+app.use("/api/admin",adminR); 
 app.use("/api/auth",authR);
+app.use('/api/flowchart',flowchartR); 
+
 connectDB();
 
 const PORT = process.env.PORT || 5000;
