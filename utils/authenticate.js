@@ -5,7 +5,7 @@ const User = require('../models/User');
 const authenticate = async (req, res, next) => {
   // Get token from Authorization header
   const token = req.header('Authorization')?.replace('Bearer ', '');
-
+console.log("token",token)
   if (!token) {
     return res.status(401).json({ message: 'No token, authorization denied' });
   }
@@ -21,10 +21,10 @@ const authenticate = async (req, res, next) => {
     }
 
     req.user = user;  // Add user information to req.user
-    console.log(req.user);
+    console.log("req.user",req.user);
     next(); // Proceed to the next middleware/route handler
   } catch (error) {
-    res.status(401).json({ message: 'Token is not valid' });
+    res.status(401).json({ message: 'Token is not valid' }); 
   }
 };
 

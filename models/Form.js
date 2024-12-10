@@ -11,7 +11,7 @@ const formSchema = new mongoose.Schema({
     email: { type: String, required: true },
     phone: { type: String, required: true },
   },
-  altContact: {
+  altContact: { 
     name: { type: String},
     title: { type: String },
     email: { type: String },
