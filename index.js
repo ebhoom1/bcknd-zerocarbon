@@ -3,10 +3,15 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const connectDB = require("./config/db");
 const bodyParser=require('body-parser');
+
+
 const userR = require("./router/userR");
 const adminR = require("./router/adminR");
 const authR=require("./router/authR");
 const flowchartR=require("./router/flowchartR");
+const EmissionFactorRoute = require("./router/EmissionFactor")
+
+
 dotenv.config();
 
 const app = express();
@@ -20,7 +25,7 @@ app.use("/api/user", userR);
 app.use("/api/admin",adminR); 
 app.use("/api/auth",authR);
 app.use('/api/flowchart',flowchartR); 
-
+app.use('/api',EmissionFactorRoute)
 connectDB();
 
 const PORT = process.env.PORT || 5000;

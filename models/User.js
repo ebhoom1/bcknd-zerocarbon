@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema(
     address: { type: String, required: true },
     companyName: { type: String },
     isFirstLogin: { type: Boolean, default: false },
-  },
+  },   
   { timestamps: true }
 );
 
