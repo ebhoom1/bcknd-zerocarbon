@@ -10,6 +10,8 @@ const adminR = require("./router/adminR");
 const authR=require("./router/authR");
 const flowchartR=require("./router/flowchartR");
 const EmissionFactorRoute = require("./router/EmissionFactor")
+const gwpRoutes = require('./router/gwpRoutes');
+
 
 
 dotenv.config();
@@ -26,6 +28,8 @@ app.use("/api/admin",adminR);
 app.use("/api/auth",authR);
 app.use('/api/flowchart',flowchartR); 
 app.use('/api',EmissionFactorRoute)
+app.use('/api/gwp',gwpRoutes);
+
 connectDB();
 
 const PORT = process.env.PORT || 5000;
