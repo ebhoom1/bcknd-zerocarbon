@@ -10,6 +10,9 @@ const FuelCombustionSchema = new mongoose.Schema(
     CH4: { type: Number, required: true }, // Original CH4 value
     N2O: { type: Number, required: true }, // Original N2O value
     unit: { type: String, default: 'Kg/TJ' },
+    source: {type: String, },
+    reference: {type: String},
+        
 
    
     assessmentType: { type: String, required: true }, // AR5, AR6, etc.

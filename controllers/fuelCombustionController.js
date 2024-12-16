@@ -22,6 +22,8 @@ exports.addFuelCombustion = async (req, res) => {
         CO2AssessmentType, // Assessment type for CO2 (e.g., AR5, AR6)
         CH4AssessmentType, // Assessment type for CH4
         N2OAssessmentType, // Assessment type for N2O
+        source,
+        reference
       } = req.body;
   
       // Helper function to fetch assessment value based on chemicalFormula and assessmentType
@@ -110,6 +112,8 @@ exports.addFuelCombustion = async (req, res) => {
         CO2e_KgL,
         CO2e_Kgm3,
         assessmentType: `CO2: ${CO2AssessmentType}, CH4: ${CH4AssessmentType}, N2O: ${N2OAssessmentType}`,
+        source,
+        reference
       });
   
       await newEntry.save();
