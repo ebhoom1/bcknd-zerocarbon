@@ -11,6 +11,7 @@ const authR=require("./router/authR");
 const flowchartR=require("./router/flowchartR");
 const EmissionFactorRoute = require("./router/EmissionFactor")
 const gwpRoutes = require('./router/gwpRoutes');
+const fuelCombustionRoutes = require('./router/fuelCombustionRoutes');
 
 
 
@@ -29,6 +30,7 @@ app.use("/api/auth",authR);
 app.use('/api/flowchart',flowchartR); 
 app.use('/api',EmissionFactorRoute)
 app.use('/api/gwp',gwpRoutes);
+app.use('/api/fuelCombustion',fuelCombustionRoutes);
 
 connectDB();
 
