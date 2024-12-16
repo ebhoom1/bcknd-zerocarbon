@@ -1,9 +1,12 @@
-// models/GWP.js
 const mongoose = require('mongoose');
 
 const GWPSchema = new mongoose.Schema({
   chemicalName: {
     type: String,
+    required: true,
+  },
+  chemicalFormula: {
+    type: String, // New field for storing the chemical formula
     required: true,
   },
   assessments: {

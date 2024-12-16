@@ -11,5 +11,6 @@ router.get('/:id', gwpController.getGWPById);
 router.put('/update/:id', gwpController.updateGWP);
 router.delete('/delete/:id', gwpController.deleteGWP);
 router.get('/chemical/:chemicalName', gwpController.getGWPByChemicalName);
+router.get('/chemicalFormula/:chemicalFormula',gwpController.getGWPByChemicalFormula)
 
 module.exports = router;
