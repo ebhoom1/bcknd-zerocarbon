@@ -23,7 +23,10 @@ app.use(express.json());
 // app.use(bodyParser.json({ limit: '50mb' }));
 // app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(cors({
+    origin: ["http://localhost:3000", "http://13.232.145.124"],
+    credentials: true
+}));
 app.use("/api/user", userR);
 app.use("/api/admin",adminR); 
 app.use("/api/auth",authR);
