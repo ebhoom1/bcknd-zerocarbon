@@ -22,7 +22,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: ["http://localhost:3000", "http://13.232.145.124"],
+    origin: ["http://localhost:3000", "https://api.zerotohero.ebhoom.com"],
     credentials: true,
 }));
 
