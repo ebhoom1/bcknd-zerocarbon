@@ -39,13 +39,13 @@ app.use("/api/country-emission-factors", CountryemissionFactorRouter);
 // Connect to Database
 connectDB();
 
-// Serve Static Files
-app.use(express.static(path.join(__dirname, "build")));
+// // Serve Static Files
+// app.use(express.static(path.join(__dirname, "build")));
 
-// Catch-All Route
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "build", "index.html"));
-});
+// // Catch-All Route
+// app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "build", "index.html"));
+// });
 
 // Start Server
 const PORT = process.env.PORT || 5000;
