@@ -47,6 +47,7 @@
 // module.exports = mongoose.model('FuelCombustion', FuelCombustionSchema);
 
 
+
 const mongoose = require('mongoose');
 
 const AssessmentSchema = new mongoose.Schema({
@@ -82,4 +83,3 @@ const FuelCombustionSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 module.exports = mongoose.model('FuelCombustion', FuelCombustionSchema);
-
