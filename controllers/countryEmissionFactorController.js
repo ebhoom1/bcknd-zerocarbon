@@ -4,12 +4,43 @@ const EmissionFactor = require('../models/contryEmissionFactorModel');
 const addEmissionFactor = async (req, res) => {
     try {
         const data = req.body;
+
+        // Generate periodLabel for each yearly value
+        if (data.yearlyValues) {
+            data.yearlyValues = data.yearlyValues.map(value => {
+                const [fromDay, fromMonth, fromYear] = value.from.split('/');
+                const [toDay, toMonth, toYear] = value.to.split('/');
+
+                if (!fromDay || !fromMonth || !fromYear || !toDay || !toMonth || !toYear) {
+                    throw new Error('Invalid date format. Expected dd/mm/yyyy');
+                }
+
+                const fromLabel = `${getMonthName(fromMonth)}-${fromYear}`;
+                const toLabel = `${getMonthName(toMonth)}-${toYear}`;
+                return {
+                    ...value,
+                    from: `${fromDay}/${fromMonth}/${fromYear}`,
+                    to: `${toDay}/${toMonth}/${toYear}`,
+                    periodLabel: `${fromLabel} to ${toLabel}`
+                };
+            });
+        }
+
         const newEmissionFactor = new EmissionFactor(data);
         await newEmissionFactor.save();
         return res.status(201).json({ message: 'Emission factor added successfully', data: newEmissionFactor });
     } catch (error) {
         return res.status(500).json({ message: 'Error adding emission factor', error: error.message });
     }
+};
+
+// Helper function to get month name
+const getMonthName = (month) => {
+    const months = [
+        'january', 'february', 'march', 'april', 'may', 'june',
+        'july', 'august', 'september', 'october', 'november', 'december'
+    ];
+    return months[parseInt(month, 10) - 1];
 };
 
 // Get all emission factors

@@ -5,13 +5,15 @@ const CountryEmissionFactorSchema = new mongoose.Schema({
     regionGrid: { type: String, required: true },
     emissionFactor: { type: String, required: true }, // tCO2/MWh
     reference: { type: String, default: "" },
-    unit: { type: String, default: 'tCO2/MWh' },
+    unit: { type: String, default: 'kWh' },
     yearlyValues: [
         {
-            year: { type: String, required: true },
+            from: { type: String, required: true }, // dd/mm/yyyy
+            to: { type: String, required: true },   // dd/mm/yyyy
+            periodLabel: { type: String, required: true }, // e.g., march-2020 to march-2021
             value: { type: Number, required: true }
         }
     ]
 }, { timestamps: true });
 
-module.exports = mongoose.model('ContryEmissionFactor', CountryEmissionFactorSchema);
+module.exports = mongoose.model('CountryEmissionFactor', CountryEmissionFactorSchema);
