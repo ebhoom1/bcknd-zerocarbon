@@ -98,3 +98,90 @@ exports.calculateAndSaveElectricityEmission = async (req, res) => {
     return res.status(500).json({ message: "An error occurred while calculating emissions.", error: error.message });
   }
 };
+
+exports.getElectricityEmissionsByUserId = async (req, res) => {
+    try {
+      const { userId } = req.params;
+  
+      const data = await CalculationOfElectricity.find({ userId }).populate('userId', 'userName email');
+      if (!data.length) {
+        return res.status(404).json({ message: "No data found for the specified user." });
+      }
+  
+      res.status(200).json({ message: "Electricity emissions fetched successfully.", data });
+    } catch (error) {
+      console.error("Error fetching electricity emissions:", error.message);
+      res.status(500).json({ message: "An error occurred while fetching emissions.", error: error.message });
+    }
+  };
+
+  
+  exports.editElectricityEmissionsByUserId = async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const { startDate, periodOfDate, ...otherFields } = req.body;
+  
+      let endDate;
+  
+      // Calculate endDate based on periodOfDate and startDate
+      if (startDate && periodOfDate) {
+        if (periodOfDate === "monthly") {
+          endDate = moment(startDate, "DD/MM/YYYY").add(1, "month").format("DD/MM/YYYY");
+        } else if (periodOfDate === "2-months") {
+          endDate = moment(startDate, "DD/MM/YYYY").add(2, "months").format("DD/MM/YYYY");
+        } else if (periodOfDate === "yearly") {
+          endDate = moment(startDate, "DD/MM/YYYY").add(1, "year").format("DD/MM/YYYY");
+        } else {
+          return res.status(400).json({ message: "Invalid periodOfDate. Use 'monthly', '2-months', or 'yearly'." });
+        }
+      }
+  
+      const updateData = { ...otherFields, startDate, endDate };
+  
+      const updatedData = await CalculationOfElectricity.findOneAndUpdate(
+        { userId },
+        updateData,
+        { new: true, runValidators: true }
+      );
+  
+      if (!updatedData) {
+        return res.status(404).json({ message: "No data found for the specified user." });
+      }
+  
+      res.status(200).json({ message: "Electricity emissions updated successfully.", data: updatedData });
+    } catch (error) {
+      console.error("Error updating electricity emissions:", error.message);
+      res.status(500).json({ message: "An error occurred while updating emissions.", error: error.message });
+    }
+  };
+  
+
+  exports.deleteElectricityEmissionsByUserIdAndDates = async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const { startDate, endDate } = req.body;
+  
+      // Validate required fields
+      if (!startDate || !endDate) {
+        return res.status(400).json({ message: "Start date and end date are required." });
+      }
+  
+      // Delete record based on userId, startDate, and endDate
+      const deletedData = await CalculationOfElectricity.findOneAndDelete({
+        userId,
+        startDate,
+        endDate,
+      });
+  
+      if (!deletedData) {
+        return res.status(404).json({ message: "No data found for the specified user and dates." });
+      }
+  
+      res.status(200).json({ message: "Electricity emissions deleted successfully.", data: deletedData });
+    } catch (error) {
+      console.error("Error deleting electricity emissions:", error.message);
+      res.status(500).json({ message: "An error occurred while deleting emissions.", error: error.message });
+    }
+  };
+  
+  
