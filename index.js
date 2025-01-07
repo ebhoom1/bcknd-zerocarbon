@@ -14,6 +14,9 @@ const EmissionFactorRoute = require("./router/EmissionFactor");
 const gwpRoutes = require("./router/gwpRoutes");
 const fuelCombustionRoutes = require("./router/fuelCombustionRoutes");
 const CountryemissionFactorRouter = require("./router/countryemissionFactorRouter");
+const CalculationDataOfEmissionC02eRouter = require("./router/CalculationDataOfEmissionC02eRoute");
+const CalculateEmissionCO2eRouter = require("./router/CalculateEmissionCO2eRoute");
+const TotalEmissionCO2eControllerRouter = require("./router/TotalEmissionCO2eControllerRoute");
 
 dotenv.config();
 
@@ -35,6 +38,12 @@ app.use("/api", EmissionFactorRoute);
 app.use("/api/gwp", gwpRoutes);
 app.use("/api/fuelCombustion", fuelCombustionRoutes);
 app.use("/api/country-emission-factors", CountryemissionFactorRouter);
+app.use("/api", CalculationDataOfEmissionC02eRouter);
+app.use("/api", CalculateEmissionCO2eRouter);
+app.use("/api", TotalEmissionCO2eControllerRouter);
+
+
+
 
 // Connect to Database
 connectDB();
