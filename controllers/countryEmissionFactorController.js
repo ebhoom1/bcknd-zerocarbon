@@ -69,13 +69,40 @@ const getEmissionFactorById = async (req, res) => {
 const updateEmissionFactor = async (req, res) => {
     try {
         const { id } = req.params;
-        const updatedData = await EmissionFactor.findByIdAndUpdate(id, req.body, { new: true });
+        const data = req.body;
+
+        // Generate periodLabel for each yearly value
+        if (data.yearlyValues) {
+            data.yearlyValues = data.yearlyValues.map(value => {
+                const [fromDay, fromMonth, fromYear] = value.from.split('/');
+                const [toDay, toMonth, toYear] = value.to.split('/');
+
+                if (!fromDay || !fromMonth || !fromYear || !toDay || !toMonth || !toYear) {
+                    throw new Error('Invalid date format. Expected dd/mm/yyyy');
+                }
+
+                const fromLabel = `${getMonthName(fromMonth)}-${fromYear}`;
+                const toLabel = `${getMonthName(toMonth)}-${toYear}`;
+                return {
+                    ...value,
+                    from: `${fromDay}/${fromMonth}/${fromYear}`,
+                    to: `${toDay}/${toMonth}/${toYear}`,
+                    periodLabel: `${fromLabel} to ${toLabel}`
+                };
+            });
+        }
+
+        const updatedData = await EmissionFactor.findByIdAndUpdate(id, data, { new: true });
         if (!updatedData) return res.status(404).json({ message: 'Emission factor not found' });
+
         return res.status(200).json({ message: 'Emission factor updated successfully', data: updatedData });
     } catch (error) {
         return res.status(500).json({ message: 'Error updating emission factor', error: error.message });
     }
 };
+
+
+
 
 // Delete an emission factor by ID
 const deleteEmissionFactor = async (req, res) => {

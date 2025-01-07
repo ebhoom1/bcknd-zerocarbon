@@ -17,6 +17,7 @@ const CountryemissionFactorRouter = require("./router/countryemissionFactorRoute
 const CalculationDataOfEmissionC02eRouter = require("./router/CalculationDataOfEmissionC02eRoute");
 const CalculateEmissionCO2eRouter = require("./router/CalculateEmissionCO2eRoute");
 const TotalEmissionCO2eControllerRouter = require("./router/TotalEmissionCO2eControllerRoute");
+const CalculationOfElectricityRouter = require("./router/CalculationOfElectricityRouter")
 
 dotenv.config();
 
@@ -41,6 +42,7 @@ app.use("/api/country-emission-factors", CountryemissionFactorRouter);
 app.use("/api", CalculationDataOfEmissionC02eRouter);
 app.use("/api", CalculateEmissionCO2eRouter);
 app.use("/api", TotalEmissionCO2eControllerRouter);
+app.use("/api", CalculationOfElectricityRouter);
 
 
 
