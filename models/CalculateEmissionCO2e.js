@@ -14,6 +14,9 @@ const CalculateEmissionCO2eSchema = new mongoose.Schema({
   emissionCO2e: { type: Number, required: true },
   standards: { type: String, required: true }, // From `CalculationDataOfEmissionC02e`
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  comments: { type: String, default: "" }, // Comments provided by the user
+  documents: { type: String, default: "" }, // Link or reference to document
+  fuelSupplier: { type: String, default: "" }, // Fuel supplier details
 }, { timestamps: true });
 
 module.exports = mongoose.model("CalculateEmissionCO2e", CalculateEmissionCO2eSchema);

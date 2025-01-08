@@ -14,7 +14,12 @@ exports.calculateAndSaveEmission = async (req, res) => {
       uncertaintyLevelConsumedData = 0,
       uncertaintyLevelEmissionFactor = 0,
       userId,
+      comments,
+      fuelSupplier,
+
     } = req.body;
+    // Handle document upload
+    const document = req.file ? req.file.path : "";
 
     // Step 1: Calculate endDate
     let endDate;
@@ -144,6 +149,9 @@ exports.calculateAndSaveEmission = async (req, res) => {
         emissionCO2e,
         standards,
         userId,
+        comments,
+        fuelSupplier,
+        document,
       });
 
       await newCalculation.save();
@@ -191,6 +199,9 @@ exports.calculateAndSaveEmission = async (req, res) => {
         emissionCO2e,
         standards,
         userId,
+        comments,
+        fuelSupplier,
+        document,
       });
 
       await newCalculation.save();
