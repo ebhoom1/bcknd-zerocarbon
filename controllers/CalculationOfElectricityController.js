@@ -16,6 +16,7 @@ exports.calculateAndSaveElectricityEmission = async (req, res) => {
       startDate,
       uncertaintyLevelConsumedData = 0,
       uncertaintyLevelEmissionFactor = 0,
+      billAmount,
     } = req.body;
 
     // Step 1: Calculate endDate
@@ -89,6 +90,7 @@ exports.calculateAndSaveElectricityEmission = async (req, res) => {
       uncertaintyLevelConsumedData,
       uncertaintyLevelEmissionFactor,
       emissionCO2e,
+      billAmount
     });
 
     await newCalculation.save();

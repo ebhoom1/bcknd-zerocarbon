@@ -13,6 +13,7 @@ const CalculationOfElectricitySchema = new mongoose.Schema({
   uncertaintyLevelConsumedData: { type: Number, default: 0 }, // Example: 2 (percentage)
   uncertaintyLevelEmissionFactor: { type: Number, default: 0 }, // Example: 1 (percentage)
   emissionCO2e: { type: Number, required: true }, // Calculated CO2e Emission
+  billAmount:{type: Number, default: 0, required: true}
 }, { timestamps: true });
 
 module.exports = mongoose.model('CalculationOfElectricity', CalculationOfElectricitySchema);
