@@ -104,9 +104,9 @@ const updateFlowchartAdmin = async (req, res) => {
 
     // Check if the node exists in the flowchart
     const nodeIndex = flowchart.nodes.findIndex((node) => node.id === nodeId);
-    if (nodeIndex === -1) {
-      return res.status(404).json({ message: "Node not found." });
-    }
+    // if (nodeIndex === -1) {
+    //   return res.status(404).json({ message: "Node not found." });
+    // }
 
     // Use $set to update only the fields provided in updatedData
     const updatedNodeKey = `nodes.${nodeIndex}`;

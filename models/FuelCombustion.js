@@ -51,7 +51,7 @@
 const mongoose = require('mongoose');
 
 const AssessmentSchema = new mongoose.Schema({
-  assessmentType: { type: String, required: true }, // e.g., AR5, AR6
+  assessmentType: { type: String }, // e.g., AR5, AR6
   CO2_KgT: { type: Number },
   CH4_KgT: { type: Number },
   N2O_KgT: { type: Number },

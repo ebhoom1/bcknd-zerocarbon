@@ -109,10 +109,20 @@ const leadsStatus = async (req, res, next) => {
   }
 };
 
+const getStatusCompleted = async (req, res, next) => {
+  try {
+    const forms = await Form.find({status:"Completed"}).sort({ createdAt: -1 });
+    res.status(200).json(forms);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching forms", error });
+  }
+};
+
 module.exports = {
   getFormByFilter,
   getForm,
   getFormById,
   getDashboardMatrics,
   leadsStatus,
+  getStatusCompleted ,
 };
