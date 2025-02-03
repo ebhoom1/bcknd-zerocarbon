@@ -33,7 +33,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: ["http://localhost:3000","http://15.207.14.226","https://api.esg.ebhoom.com","https://esg.ebhoom.com"],
+    origin: ["http://localhost:3000","http://13.126.65.16:5000","http://esg.ebhoom.com"],
     credentials: true,
 }));
 // app.use(cors({
