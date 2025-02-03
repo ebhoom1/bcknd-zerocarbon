@@ -33,9 +33,13 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: ["http://localhost:3000", "https://api.zerohero.ebhoom.com", "https://zerotohero.ebhoom.com"],
+    origin: ["http://localhost:3000", "http://15.207.14.226"],
     credentials: true,
 }));
+// app.use(cors({
+//     origin: ["http://localhost:3000", "https://api.zerohero.ebhoom.com", "https://zerotohero.ebhoom.com"],
+//     credentials: true,
+// }));
 
 // Routes
 app.use("/api/user", userR);
