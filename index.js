@@ -33,7 +33,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: ["http://localhost:3000", "http://15.207.14.226"],
+    origin: ["http://localhost:3000","https://api.esg.ebhoom.com","https://esg.ebhoom.com"],
     credentials: true,
 }));
 // app.use(cors({
@@ -69,13 +69,13 @@ app.get("/", (req, res) => {
 // Connect to Database
 connectDB();
 
-// Serve Static Files
-app.use(express.static(path.join(__dirname, "build")));
+// // Serve Static Files
+// app.use(express.static(path.join(__dirname, "build")));
 
-// Catch-All Route
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "build", "index.html"));
-});
+// // Catch-All Route
+// app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "build", "index.html"));
+// });
 
 // Start Server
 const PORT = process.env.PORT || 5000;
