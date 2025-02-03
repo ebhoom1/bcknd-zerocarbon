@@ -1,14 +1,18 @@
 const Flowchart = require("../models/Flowchart");
-const mongoose = require("mongoose"); 
-
-
+const mongoose = require("mongoose");
 
 const saveFlowchart = async (req, res) => {
   const { userId, flowchartData } = req.body;
-  console.log("flowchartData:", flowchartData);
 
-  if (!userId || !flowchartData || !flowchartData.nodes || !flowchartData.edges) {
-    return res.status(400).json({ message: "Missing required fields: userId or flowchart data" });
+  if (
+    !userId ||
+    !flowchartData ||
+    !flowchartData.nodes ||
+    !flowchartData.edges
+  ) {
+    return res
+      .status(400)
+      .json({ message: "Missing required fields: userId or flowchart data" });
   }
 
   try {
@@ -20,15 +24,18 @@ const saveFlowchart = async (req, res) => {
       label: node.label,
       position: node.position,
       parentNode: node.parentNode || null,
-      details: typeof node.details === 'object' ? node.details : {
-        boundaryDetails: {},
-        scopeDetails: [],
-      }, // Ensure details is always an object
+      details:
+        typeof node.details === "object"
+          ? node.details
+          : {
+              boundaryDetails: {},
+              scopeDetails: [],
+            }, // Ensure details is always an object
     }));
 
     const edges = flowchartData.edges.map((edge) => ({
       id: edge.id,
-      source: edge.source, 
+      source: edge.source,
       target: edge.target,
     }));
 
@@ -38,7 +45,7 @@ const saveFlowchart = async (req, res) => {
       await existingFlowchart.save();
     } else {
       const newFlowchart = new Flowchart({ userId, nodes, edges });
-      console.log("newflowchart:",newFlowchart); 
+      console.log("newflowchart:", newFlowchart);
       await newFlowchart.save();
     }
     res.status(200).json({ message: "Flowchart saved successfully" });
@@ -47,7 +54,6 @@ const saveFlowchart = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-
 
 const getFlowchart = async (req, res) => {
   const { userId } = req.params;
@@ -86,8 +92,6 @@ const getFlowchart = async (req, res) => {
   }
 };
 
-
-
 const updateFlowchartAdmin = async (req, res) => {
   const { userId, nodeId, updatedData } = req.body;
 
@@ -102,11 +106,17 @@ const updateFlowchartAdmin = async (req, res) => {
       return res.status(404).json({ message: "Flowchart not found." });
     }
 
+    // Convert nodeId to ObjectId for comparison
+    const objectIdNodeId = new mongoose.Types.ObjectId(nodeId);
+
     // Check if the node exists in the flowchart
-    const nodeIndex = flowchart.nodes.findIndex((node) => node.id === nodeId);
-    // if (nodeIndex === -1) {
-    //   return res.status(404).json({ message: "Node not found." });
-    // }
+    const nodeIndex = flowchart.nodes.findIndex((node) =>
+      node.id.equals(objectIdNodeId)
+    );
+
+    if (nodeIndex === -1) {
+      return res.status(404).json({ message: "Node not found." });
+    }
 
     // Use $set to update only the fields provided in updatedData
     const updatedNodeKey = `nodes.${nodeIndex}`;
@@ -114,10 +124,9 @@ const updateFlowchartAdmin = async (req, res) => {
       $set: {
         [`${updatedNodeKey}.label`]: updatedData.label,
         [`${updatedNodeKey}.details.boundaryDetails`]: {
-          ...flowchart.nodes[nodeIndex].details.boundaryDetails,
+          ...flowchart.nodes[nodeIndex].details?.boundaryDetails,
           ...updatedData.details?.boundaryDetails,
         },
-        [`${updatedNodeKey}.details.scopeDetails`]: updatedData.details?.scopeDetails || flowchart.nodes[nodeIndex].details.scopeDetails,
       },
     };
 
@@ -128,7 +137,9 @@ const updateFlowchartAdmin = async (req, res) => {
       { new: true } // Return the updated document
     );
 
-    res.status(200).json({ message: "Node updated successfully.", updatedFlowchart });
+    res
+      .status(200)
+      .json({ message: "Node updated successfully.", updatedFlowchart });
   } catch (error) {
     console.error("Error updating node:", error);
     res.status(500).json({ message: "Internal server error." });
@@ -164,10 +175,9 @@ const deleteFlowchartAdmin = async (req, res) => {
   }
 };
 
-
 module.exports = {
   saveFlowchart,
   getFlowchart,
   updateFlowchartAdmin,
-  deleteFlowchartAdmin
+  deleteFlowchartAdmin,
 };

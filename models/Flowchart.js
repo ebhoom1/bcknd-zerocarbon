@@ -16,20 +16,20 @@ const NodeSchema = new mongoose.Schema({
       location: { type: String, default: null },
       boundaryComments: { type: String, default: null },
     },
-    scopeDetails: [
-      {
-        scopeType: { type: String,  },
-        category: { type: String, },
-        subCategory: { type: String,  },
-        units: { type: String, },
-        emissionFactor: { type: String,  },
-        fuel:{type: String,},
-        activity:{type: String,},
-        source:{type: String,},
-        reference:{type: String,},
-        scopeComments: { type: String, default: null },
-      },
-    ],
+    // scopeDetails: [
+    //   {
+    //     scopeType: { type: String,  },
+    //     category: { type: String, },
+    //     subCategory: { type: String,  },
+    //     units: { type: String, },
+    //     emissionFactor: { type: String,  },
+    //     fuel:{type: String,},
+    //     activity:{type: String,},
+    //     source:{type: String,},
+    //     reference:{type: String,},
+    //     scopeComments: { type: String, default: null },
+    //   },
+    // ],
   },
 });
 

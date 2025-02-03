@@ -14,10 +14,17 @@ const EmissionFactorRoute = require("./router/EmissionFactor");
 const gwpRoutes = require("./router/gwpRoutes");
 const fuelCombustionRoutes = require("./router/fuelCombustionRoutes");
 const CountryemissionFactorRouter = require("./router/countryemissionFactorRouter");
+const mobileCombustionRoutes = require('./router/mobileCombustionRoutes');
+const industrialProcessRoutes = require('./router/industrialProcessRoutes');
+const fugitiveEmissionsRoutes=require('./router/fugitiveEmissionsRoutes');
+const endOfLifeTreatmentRoutes = require('./router/endOfLifeTreatmentRoutes');
+const purchasedgoodsservicesR=require('./router/purchasedgoodsservicesR');
+const useSoldProductsRoutes = require('./router/useSoldProductsRoutes');
+
+
 const CalculationDataOfEmissionC02eRouter = require("./router/CalculationDataOfEmissionC02eRoute");
 const CalculateEmissionCO2eRouter = require("./router/CalculateEmissionCO2eRoute");
 const TotalEmissionCO2eControllerRouter = require("./router/TotalEmissionCO2eControllerRoute");
-
 
 dotenv.config();
 
@@ -39,6 +46,14 @@ app.use("/api", EmissionFactorRoute);
 app.use("/api/gwp", gwpRoutes);
 app.use("/api/fuelCombustion", fuelCombustionRoutes);
 app.use("/api/country-emission-factors", CountryemissionFactorRouter);
+app.use('/api/mobile-combustion', mobileCombustionRoutes);
+app.use('/api/industrial-processes', industrialProcessRoutes);
+app.use('/api/fugitive-emissions', fugitiveEmissionsRoutes);
+app.use('/api/purchasedgoodsservices', purchasedgoodsservicesR);
+app.use('/api/end-of-life-treatment', endOfLifeTreatmentRoutes);
+app.use('/api/use-sold-products', useSoldProductsRoutes);
+
+
 app.use("/api", CalculationDataOfEmissionC02eRouter);
 app.use("/api", CalculateEmissionCO2eRouter);
 app.use("/api", TotalEmissionCO2eControllerRouter);

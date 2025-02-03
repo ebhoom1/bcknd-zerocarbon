@@ -165,10 +165,7 @@ const formSubmission = async (req, res) => {
     const emailSubject = "New Form Submission Received";
     const emailMessage = `
       A new form submission has been received from  ${formData.companyName}
-
       // User ID: ${userId}
-      // Submitted Details: ${JSON.stringify(formData, null, 2)}
-
       Please review the submission in the admin dashboard.
     `;
 
