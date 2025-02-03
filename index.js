@@ -58,18 +58,20 @@ app.use("/api", CalculationDataOfEmissionC02eRouter);
 app.use("/api", CalculateEmissionCO2eRouter);
 app.use("/api", TotalEmissionCO2eControllerRouter);
 
-
+app.get("/", (req, res) => {
+    res.send("Backend is running!");
+});
 
 // Connect to Database
 connectDB();
 
-// // Serve Static Files
-// app.use(express.static(path.join(__dirname, "build")));
+// Serve Static Files
+app.use(express.static(path.join(__dirname, "build")));
 
-// // Catch-All Route
-// app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname, "build", "index.html"));
-// });
+// Catch-All Route
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 // Start Server
 const PORT = process.env.PORT || 5000;
