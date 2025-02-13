@@ -20,7 +20,10 @@ const fugitiveEmissionsRoutes=require('./router/fugitiveEmissionsRoutes');
 const endOfLifeTreatmentRoutes = require('./router/endOfLifeTreatmentRoutes');
 const purchasedgoodsservicesR=require('./router/purchasedgoodsservicesR');
 const useSoldProductsRoutes = require('./router/useSoldProductsRoutes');
-
+const submissionRoutes = require("./router/submissionRoutes");
+const analyseDecarbonizationRoadmap = require('./router/analyseDecarbonizationRoadmap');
+const renewableEnergyCalculate=require('./router/renewableEnergyCalculateR')
+const emissionReductionSimulator=require('./router/emissionReductionSimulator');
 
 const CalculationDataOfEmissionC02eRouter = require("./router/CalculationDataOfEmissionC02eRoute");
 const CalculateEmissionCO2eRouter = require("./router/CalculateEmissionCO2eRoute");
@@ -56,7 +59,11 @@ app.use('/api/fugitive-emissions', fugitiveEmissionsRoutes);
 app.use('/api/purchasedgoodsservices', purchasedgoodsservicesR);
 app.use('/api/end-of-life-treatment', endOfLifeTreatmentRoutes);
 app.use('/api/use-sold-products', useSoldProductsRoutes);
+app.use("/api/submissions", submissionRoutes);
 
+app.use("/api/analyse-roadmap",analyseDecarbonizationRoadmap);
+app.use("/api/renewable-energy",renewableEnergyCalculate);
+app.use("/api/emissions-reduction",emissionReductionSimulator);
 
 app.use("/api", CalculationDataOfEmissionC02eRouter);
 app.use("/api", CalculateEmissionCO2eRouter);
