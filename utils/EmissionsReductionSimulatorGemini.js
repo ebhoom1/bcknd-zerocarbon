@@ -57,8 +57,8 @@ exports.analyseEmissionsReduction = async (
 
       Generate a similar analysis for an organization with:
       - **Strategy Adjustments:** ${strategyAdjustments}
-      - **Current Energy Consumption:** ${energyConsumption} kWh annually.
-      - **Fuel Usage:** ${fuelUsage} liters of petrol/diesel/natural gas annually.
+      - **Current Energy Consumption:** ${energyConsumption} kWh or CO2e annually.
+      - **Fuel Usage:** ${fuelUsage} liters of petrol/diesel/natural gas consumed annually.
       - **Building Efficiency Data:** ${buildingEfficiency}.
       - **Vehicle Fleet Data:** ${vehicleFleet} petrol/diesel vehicles, planned EV transition.
       - **Waste Management Practices:** ${wasteManagement}.

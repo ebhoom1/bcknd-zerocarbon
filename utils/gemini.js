@@ -53,11 +53,16 @@ const model = genAi.getGenerativeModel({
   },
 });
 
-exports.analyseRoadmap = async (industry, targetYear, totalEmissions, annualReduction,
-    energyMix,
-    technologyAdoption,
-    operationalChanges,
-    budgetConstraints) => {
+exports.analyseRoadmap = async (
+  industry,
+  targetYear,
+  totalEmissions,
+  annualReduction,
+  energyMix,
+  technologyAdoption,
+  operationalChanges,
+  budgetConstraints
+) => {
   try {
     const sampleOutput = {
       milestones: [

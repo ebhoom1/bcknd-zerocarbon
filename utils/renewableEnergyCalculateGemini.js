@@ -1,3 +1,5 @@
+
+
 require("dotenv").config();
 const { GoogleGenerativeAI, SchemaType } = require("@google/generative-ai");
 
@@ -5,63 +7,23 @@ const schema = {
   description: "Renewable Energy Impact Analysis",
   type: SchemaType.OBJECT,
   properties: {
-    scope2Reduction: {
-      type: SchemaType.NUMBER,
-      description: "Estimated reduction in Scope 2 CO2 emissions in tonnes",
-      nullable: false,
-    },
-    costSavings: {
-      type: SchemaType.NUMBER,
-      description: "Estimated financial savings from renewable energy adoption in USD",
+    scope2Impact: {
+      type: SchemaType.STRING,
+      description: "Estimated reduction in Scope 2 CO2 emissions",
       nullable: false,
     },
     paybackPeriod: {
-      type: SchemaType.NUMBER,
+      type: SchemaType.STRING,
       description: "Expected payback period in years",
       nullable: false,
     },
-    solarFeasibility: {
+    renewableOptions: {
       type: SchemaType.STRING,
-      description: "Assessment of solar power feasibility at the site",
-      nullable: false,
-    },
-    gridMixImpact: {
-      type: SchemaType.STRING,
-      description: "Impact of the local energy grid mix on the renewable transition",
-      nullable: false,
-    },
-    batteryStorageRecommendation: {
-      type: SchemaType.STRING,
-      description: "Recommended battery storage plan for peak energy balancing",
-      nullable: false,
-    },
-    investmentReturn: {
-      type: SchemaType.NUMBER,
-      description: "Expected return on investment (ROI) based on budget allocation",
-      nullable: false,
-    },
-    governmentIncentiveBenefit: {
-      type: SchemaType.STRING,
-      description: "Impact of government incentives on the investment and payback period",
-      nullable: false,
-    },
-    siteConstraintsAnalysis: {
-      type: SchemaType.STRING,
-      description: "Analysis of site constraints affecting renewable energy installation",
+      description: "Recommended local renewable energy sources",
       nullable: false,
     },
   },
-  required: [
-    "scope2Reduction",
-    "costSavings",
-    "paybackPeriod",
-    "solarFeasibility",
-    "gridMixImpact",
-    "batteryStorageRecommendation",
-    "investmentReturn",
-    "governmentIncentiveBenefit",
-    "siteConstraintsAnalysis",
-  ],
+  required: ["scope2Impact", "paybackPeriod", "renewableOptions"],
 };
 
 const genAi = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -84,56 +46,33 @@ exports.calculateRenewableImpact = async (
   siteConstraints
 ) => {
   try {
-    const sampleOutput = {
-        "scope2Reduction": 15.8,
-        "costSavings": 4500.25,
-        "paybackPeriod": 5.2,
-        "solarFeasibility": "High",
-        "gridMixImpact": "Moderate impact with 40% renewable grid mix",
-        "batteryStorageRecommendation": "Battery storage at 50% ensures peak load balancing",
-        "investmentReturn": 7.3,
-        "governmentIncentiveBenefit": "Eligible for 20% subsidy, reducing payback period",
-        "siteConstraintsAnalysis": "Limited rooftop space, ground-mount installation required"
-      }
-      ;
+    const prompt = `
+      Given the following renewable energy data:
 
-      const prompt = `
-      Given the following renewable energy impact analysis:
-      ${JSON.stringify(sampleOutput, null, 2)}
-    
-      Generate a similar impact analysis for an organization with:
-      - **Energy Consumption:** ${energyConsumption} kWh annually.
-      - **Renewable Energy Adoption:** ${renewablePercentage}% planned adoption.
-      - **Solar/Wind Feasibility:** ${solarWindFeasibility} availability at the site.
-      - **Grid Energy Mix:** ${gridEnergyMix} renewable vs fossil fuel ratio.
-      - **Investment Budget:** ${investmentBudget} allocated for renewable transition.
-      - **Expected Government Incentives:** ${governmentIncentives} available subsidies/tax breaks.
-      - **Battery Storage Plans:** ${batteryStoragePlans} percentage of energy stored for peak hours.
-      - **Site Constraints:** ${siteConstraints} affecting renewable installation.
-    
-      **Ensure that all numerical values are provided as actual numbers, without text explanations.**
+      - Current Energy Consumption: ${energyConsumption} kWh
+      - Renewable Energy Goals: ${renewablePercentage}%
+      - Solar/Wind Feasibility: ${solarWindFeasibility}
+      - Grid Energy Mix: ${gridEnergyMix}%
+      - Investment Budget: $${investmentBudget}
+      - Expected Government Incentives: ${governmentIncentives}
+      - Battery Storage Plans: ${batteryStoragePlans}%
+      - Site Constraints: ${siteConstraints}
+
       
-      The response must follow this **exact format**:
+      **Provide a concise JSON response with only key values:**
       {
-        "scope2Reduction": <numeric value in tonnes>,
-        "costSavings": <numeric value in USD>,
-        "paybackPeriod": <numeric value in years>,
-        "solarFeasibility": "<brief high/medium/low>",
-        "gridMixImpact": "<brief percentage impact>",
-        "batteryStorageRecommendation": "<brief recommendation>",
-        "investmentReturn": <numeric ROI in years>,
-        "governmentIncentiveBenefit": "<brief incentive impact>",
-        "siteConstraintsAnalysis": "<brief constraint summary>"
+        "scope2Impact": "Estimated reduction of <X> metric tons CO2e per year",
+        "paybackPeriod": "<Y> years",
+        "renewableOptions": "Recommended local renewable energy sources with estimated generation (e.g., Solar panels: 50,000 kWh/year, Wind turbines: 30,000 kWh/year)."
       }
-    
-      **Do NOT return any long explanations. Only provide the structured numerical and brief categorical values.**
+      
+      **Do NOT include any explanations, just formatted JSON output.**
     `;
-    
 
     const results = await model.generateContent(prompt);
     let responseText = results.response.text();
 
-    // Remove markdown code block markers if present
+    // Clean up AI response
     responseText = responseText.trim();
     if (responseText.startsWith("```json")) {
       responseText = responseText.replace(/^```json\s*/, "");
@@ -142,7 +81,7 @@ exports.calculateRenewableImpact = async (
       responseText = responseText.replace(/```$/, "");
     }
 
-    // Parse the response text as JSON and return it
+    // Convert AI response to JSON
     const jsonResponse = JSON.parse(responseText);
     return jsonResponse;
   } catch (error) {

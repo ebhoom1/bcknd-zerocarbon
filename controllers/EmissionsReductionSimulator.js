@@ -25,7 +25,7 @@ exports.calculateEmissionsReduction = async (req, res) => {
       financialConstraints,
       policyChanges
     );
-
+console.log("analysedData ")
     if (analysedData) {
       res.status(200).json({
         message: "Emissions Reduction Simulation Completed Successfully",

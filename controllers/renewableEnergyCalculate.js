@@ -25,6 +25,7 @@ exports.calculateRenewableEnergyImpact = async (req, res) => {
     );
 
     if (analysedData) {
+      console.log("analysedData:",analysedData);
       res.status(200).json({
         message: "Renewable Energy Impact Analysis Completed Successfully",
         analysedData,
