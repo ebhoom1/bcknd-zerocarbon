@@ -1,17 +1,20 @@
 const Form = require("../models/Form");
+const User=require("../models/User");
 
-const getForm = async (req, res, next) => {
+const getregisteredusers = async (req, res, next) => {
   try {
-    const forms = await Form.find().sort({ createdAt: -1 });
-    res.status(200).json(forms);
+    const users = await User.find({ userType: "user" });
+    res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ message: "Error fetching forms", error });
   }
 };
 
+
+
 const getFormById = async (req, res, next) => {
   try {
-    const form = await Form.findById(req.params.id);
+    const form = await Form.findOne({userId:req.params.id});
     if (!form) {
       return res.status(404).json({ message: "Form not found" });
     }
@@ -38,7 +41,7 @@ const getFormByFilter = async (req, res, next) => {
       filters.companyName = { $regex: companyName, $options: "i" };
     if (status)
       filters.status = { $regex: status, $options: "i" };    
-    const forms = await Form.find(filters).sort({ createdAt: -1 });
+    const forms = await User.find(filters).sort({ createdAt: -1 });
     res.status(200).json(forms);
   } catch (err) {
     res.status(500).json({ error: "Error fetching forms" });
@@ -96,7 +99,7 @@ const leadsStatus = async (req, res, next) => {
   console.log("status:", status);
   console.log("id:", id);
   try {
-    const updatedForm = await Form.findByIdAndUpdate(
+    const updatedForm = await User.findByIdAndUpdate(
       id,
       { status },
       { new: true }
@@ -111,7 +114,7 @@ const leadsStatus = async (req, res, next) => {
 
 const getStatusCompleted = async (req, res, next) => {
   try {
-    const forms = await Form.find({status:"Completed"}).sort({ createdAt: -1 });
+    const forms = await User.find({status:"Completed"}).sort({ createdAt: -1 });
     res.status(200).json(forms);
   } catch (error) {
     res.status(500).json({ message: "Error fetching forms", error });
@@ -120,7 +123,7 @@ const getStatusCompleted = async (req, res, next) => {
 
 module.exports = {
   getFormByFilter,
-  getForm,
+  getregisteredusers,
   getFormById,
   getDashboardMatrics,
   leadsStatus,

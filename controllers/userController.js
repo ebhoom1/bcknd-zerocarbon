@@ -94,7 +94,7 @@ const login = async (req, res, next) => {
 
     // Generate JWT token
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "30d",
+      expiresIn: "10d",
     });
 
     res.status(200).json({
@@ -116,6 +116,40 @@ const login = async (req, res, next) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+const updatePassword = async (req, res) => {
+  try {
+    const { userId } = req.params; // Get user ID from request parameters
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      return res
+        .status(400)
+        .json({ message: "Please provide both current and new passwords" });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Verify current password
+    const isMatch = bcrypt.compareSync(currentPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Current password is incorrect" });
+    }
+
+    // Hash the new password
+    user.password = bcrypt.hashSync(newPassword, 10);
+    await user.save();
+
+    res.status(200).json({ message: "Password updated successfully" });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message, message: "Password update failed" });
+  }
+};
+
 
 const getUsersWithUserTypeUser = async (req, res) => {
   try {
@@ -195,6 +229,7 @@ const formSubmission = async (req, res) => {
 module.exports = {
   registerUser,
   login,
+  updatePassword,
   formSubmission,
   getUsersWithUserTypeUser,
 };
