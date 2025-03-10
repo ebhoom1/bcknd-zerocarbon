@@ -35,12 +35,13 @@ const getFormByFilter = async (req, res, next) => {
   try {
     const { companyName, status} = req.query;
 
-    const filters = {};
+    const filters = {userType: "user"};
 
     if (companyName)
       filters.companyName = { $regex: companyName, $options: "i" };
     if (status)
-      filters.status = { $regex: status, $options: "i" };    
+      filters.status = { $regex: status, $options: "i" };  
+
     const forms = await User.find(filters).sort({ createdAt: -1 });
     res.status(200).json(forms);
   } catch (err) {
@@ -96,11 +97,10 @@ const getDashboardMatrics = async (req, res, next) => {
 const leadsStatus = async (req, res, next) => {
   const { id } = req.params;
   const { status } = req.body;
-  console.log("status:", status);
-  console.log("id:", id);
+  
   try {
     const updatedForm = await User.findByIdAndUpdate(
-      id,
+      { _id: id, userType: "user" },
       { status },
       { new: true }
     );
@@ -111,6 +111,42 @@ const leadsStatus = async (req, res, next) => {
     res.status(500).json({ error: "Error updating form status" });
   }
 };
+
+
+
+const updateUserSubscription = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { subscription } = req.body;
+
+    if (!subscription) {
+      return res.status(400).json({ message: "Subscription value is required" });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      { _id: id, userType: "user" },
+      { subscription },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res.status(200).json({
+      message: "Subscription updated successfully",
+      subscription: updatedUser.subscription,
+    });
+  } catch (error) {
+    console.error("Error updating subscription:", error);
+    return res.status(500).json({
+      message: "Failed to update subscription",
+      error: error.message,
+    });
+  }
+};
+
+
 
 const getStatusCompleted = async (req, res, next) => {
   try {
@@ -127,5 +163,6 @@ module.exports = {
   getFormById,
   getDashboardMatrics,
   leadsStatus,
+  updateUserSubscription,
   getStatusCompleted ,
 };

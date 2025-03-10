@@ -38,10 +38,62 @@ exports.calculateRoadmap = async (req, res) => {
 };
 
 
+// exports.saveRoadmap = async (req, res) => {
+//   try {
+//     const { userId,industry, targetYear, totalEmissions, annualReduction, energyMix, technologyAdoption, operationalChanges, budgetConstraints, roadmapData } = req.body;
+
+//     const roadmap = new Roadmap({
+//       userId,
+//       industry,
+//       targetYear,
+//       totalEmissions,
+//       annualReduction,
+//       energyMix,
+//       technologyAdoption,
+//       operationalChanges,
+//       budgetConstraints,
+//       milestones: roadmapData,
+//     });
+
+//     await roadmap.save();
+//     res.status(201).json({ message: "Roadmap saved successfully", roadmap });
+//   } catch (error) {
+//     console.error("Error saving roadmap:", error);
+//     res.status(500).json({ message: "Error saving roadmap", error: error.message });
+//   }
+// };
+
 exports.saveRoadmap = async (req, res) => {
   try {
-    const { userId,industry, targetYear, totalEmissions, annualReduction, energyMix, technologyAdoption, operationalChanges, budgetConstraints, roadmapData } = req.body;
+    const { userId, industry, targetYear, totalEmissions, annualReduction, energyMix, technologyAdoption, operationalChanges, budgetConstraints, roadmapData } = req.body;
 
+    // Fetch the user to check the subscription type
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Define limits based on subscription type
+    const roadmapLimits = {
+      Basic: 1,
+      Standard: 3,
+      Premium: Infinity, // Allow unlimited for Premium or higher tiers
+    };
+
+    const userSubscription = user.subscription || "Basic"; // Default to Basic if not set
+    const maxAllowedRoadmaps = roadmapLimits[userSubscription];
+
+    // Count the existing roadmaps created by the user
+    const existingRoadmapCount = await Roadmap.countDocuments({ userId });
+
+    // Restrict roadmap saving if the limit is exceeded
+    if (existingRoadmapCount >= maxAllowedRoadmaps) {
+      return res.status(403).json({
+        message: `Your ${userSubscription} subscription allows only ${maxAllowedRoadmaps} roadmap(s). Upgrade your plan to save more.`,
+      });
+    }
+
+    // Create and save the roadmap
     const roadmap = new Roadmap({
       userId,
       industry,
