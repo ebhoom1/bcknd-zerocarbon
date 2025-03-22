@@ -25,7 +25,7 @@ const analyseDecarbonizationRoadmap = require('./router/analyseDecarbonizationRo
 const renewableEnergyCalculate=require('./router/renewableEnergyCalculateR')
 const emissionReductionSimulator=require('./router/emissionReductionSimulator');
 const reportRoutes = require("./router/reportRoutes");
-const mobileCombustioData=require('./router/mobileCombustionEmissionRoutes');
+const emissionCalculation=require('./router/EmissionCalculation/emissionCalculationRoutes');
 
 
 const CalculationDataOfEmissionC02eRouter = require("./router/CalculationDataOfEmissionC02eRoute");
@@ -68,7 +68,7 @@ app.use("/api/analyse-roadmap",analyseDecarbonizationRoadmap);
 app.use("/api/renewable-energy",renewableEnergyCalculate);
 app.use("/api/emissions-reduction",emissionReductionSimulator);
 app.use("/api", reportRoutes);
-app.use("/api",mobileCombustioData)
+app.use("/api",emissionCalculation)
 
 
 app.use("/api", CalculationDataOfEmissionC02eRouter);
