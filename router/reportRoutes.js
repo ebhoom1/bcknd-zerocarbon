@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { generateReport } = require("../controllers/reportController.js");
+const downloadSectionAReport = require("../controllers/report/downloadSectionAReport");
 
-router.post("/reports/generate", generateReport);
+router.post("/reports/generate/:userId", downloadSectionAReport.downloadSectionAReport);
 
 module.exports = router;

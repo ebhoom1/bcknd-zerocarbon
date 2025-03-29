@@ -56,6 +56,7 @@
 
 const Submission = require("../models/Submission");
 
+const {generateBRSRSectionAData}=require("../utils/report/generateBRSRSectionAData")
 const { calculateMobileCombustion } = require("../utils/emissionCalculation/calculateMobileCombustion");
 const { calculateStationaryCombustion } = require("../utils/emissionCalculation/calculateStationaryCombustion");
 const { calculateIndustrialProcesses } = require("../utils/emissionCalculation/calculateIndustrialProcesses");
@@ -111,6 +112,8 @@ exports.submitData = async (req, res) => {
     await calculatePurchasedGoodsServicesEmission(userId);
     await calculateUseOfSoldProducts(userId);
     await calculateEndOfLifeTreatment(userId);
+    await generateBRSRSectionAData(userId);
+
 
     res.status(200).json({ message: "Data submitted & emissions calculated successfully", submission });
 

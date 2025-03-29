@@ -1,80 +1,422 @@
 
+    <!DOCTYPE html>
     <html>
       <head>
-        <style>
-          body { font-family: Arial, sans-serif; padding: 40px; }
-          h1 { text-align: center; text-decoration: underline; color: blue; margin-top: 10px; }
-          table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-          th, td { border: 1px solid black; padding: 10px; text-align: left; vertical-align: top; word-wrap: break-word; }
-          th { background-color: #f2f2f2; }
-          .subcategory { font-weight: bold; margin-top: 10px; }
-        </style>
-      </head>
-      <body>
-        <h1>Business Responsibility and Sustainability Report (BRSR)</h1>
-        <h5>II. SECTION A: GENERAL DISCLOSURES</h5>
-        <table>
-          <tr>
-            <th>Field Name</th>
-            <th>Report</th>
-          </tr>
+      <style>
+      body {
+        margin: 20mm 10mm;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        line-height: 1.6;
+      }
+      .guidance-section {
+        margin: 10mm 20mm !important;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        page-break-inside: auto;
+      }
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 20px;
+      }
+h3{
+  text-align: left;
+  text-decoration: underline;
+  margin-bottom: 20px;
+
+}
+      thead {
+        display: table-header-group;
+      }
+    
+      tfoot {
+        display: table-footer-group;
+      }
+    
+      tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+      }
+    
+      th, td {
+        border: 0.5px solid black;
+        padding: 8px;
+        text-align: left;
+      }
+    
+      .mainhead {
+        background-color: #f2f2f2;
+        font-size: 14px;
+
+      }
+      @media print {
+        body {
+          margin: 20mm 10mm;
+          font-family: Arial, sans-serif;
+          font-size: 12px;
+          line-height: 1.6;
+        }
+        .guidance-section {
+          margin: 10mm 20mm !important;
+        }
+    
+        table {
+          page-break-inside: auto;
+        }
+    
+        tr {
+          page-break-inside: avoid;
+        }
+    
+        thead, tfoot {
+          display: table-row-group;
+        }
+        th {
+          font-weight: bold;
+          background-color: #f2f2f2;
+        }
+        .mainhead {
+          font-size: 14px;
+  
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+  <h1>Business Responsibility and Sustainability Report</h1>
+  
+  <div class="guidance-section" style="page-break-after: always;">
+    <h3>I. GENERAL GUIDANCE</h3>
+    <ol>
+      <li>
+        <strong>Inter-operability of reporting framework:</strong> Those listed entities which prepare and disclose sustainability reports (as part of annual report) based on internationally accepted reporting frameworks such as GRI, SASB, TCFD, Integrated Reporting, can cross-reference the disclosures made under such framework to the disclosures sought under the BRSR. Further, in case the data sought in the reporting format is already disclosed in the annual report, the listed entity can provide a cross-reference to the same. Thus, an entity need not disclose the same information twice in the annual report. However, the entity should specifically mention the page number of the annual report or sustainability report where the information sought under the BRSR format is disclosed as part of the report prepared based on internationally accepted reporting framework.
+      </li>
+      <li>
+        <strong>Consistency in reporting boundary:</strong> The BRSR seeks disclosure of the reporting boundary i.e. whether the reporting is done for the entity on a stand-alone or consolidated basis (Reference: Question 13, Section A). Listed entities shall ensure consistency in reporting boundary across the report.
+      </li>
+      <li>
+        <strong>Applicability:</strong> Some of the disclosures sought under the BRSR may not be applicable to certain industries, say the service industry. In such cases, the entity can state that such disclosure is not applicable along with reasons for the same.
+      </li>
+      <li>
+        <strong>Reporting Period:</strong> The term “reporting period” refers to the financial year for which BRSR is being prepared.
+      </li>
+      <li>
+        <strong>Clarity and conciseness:</strong> The listed entity should endeavour to provide clear, complete and concise responses. The web-links to the relevant document may be provided, if available.
+      </li>
+      <li>
+        <strong>Complaints section:</strong> The information sought on complaints in the format are accompanied with a column of “Remarks” where entities can explain reasons for pending complaints (if any) or can give a brief on the nature of the complaints, wherever required.
+      </li>
+      <li>
+        <strong>Gender-related disclosures:</strong> With regard to disclosures relating to gender, the format specifies male and female, however in case the entity has employed persons who have not disclosed gender or belong to any other gender, a separate column of “Other” may be added for such disclosures.
+      </li>
+      <li>
+        <strong>Definition of “Principles”:</strong> The term “Principles” refers to the Principles 1 to 9 as laid down in the National Guidelines for Responsible Business Conduct (available at the following link: <a href="https://www.mca.gov.in/Ministry/pdf/NationalGuildeline_15032019.pdf" target="_blank">https://www.mca.gov.in/Ministry/pdf/NationalGuildeline_15032019.pdf</a>).
+      </li>
+      <li>
+        <strong>Additional Disclosures:</strong> In addition to the disclosures sought under the format, the entity may disclose any other relevant sustainability related information at appropriate places.
+      </li>
+    </ol>
+  </div>
+
+
+    <h3>SECTION A: GENERAL DISCLOSURES</h3>
+    <table>
+    <thead>
       <tr>
-        <td>Scope 1: Direct Emissions</td>
-        <td><h4 class="subcategory">Mobile Combustion</h4><table width="100%"> <tr><th>Number of company-owned vehicles?</th><th>Type of vehicles?</th><th>Vehicle Name?</th><th>Fuel type per vehicle?</th><th>Fuel consumption per vehicle? (Liters)</th><th>Distance traveled per vehicle annually? (km/miles)</th></tr><tr><td>1</td><td>Passenger Cars</td><td>Toyota Innova</td><td>Petrol</td><td>1200</td><td>18000</td></tr><tr><td>1</td><td>Heavy Trucks</td><td>Ashok Leyland</td><td>Diesel</td><td>3500</td><td>25000</td></tr></table><h4 class="subcategory">Stationary Combustion</h4><table width="100%"> <tr><th>Does your company use fossil fuels for heating or electricity generation?</th><th>What type of fuel is used?</th><th>Select unit of measurement for fuel consumption:</th><th>Enter annual fuel consumption (in selected unit):</th><th>Enter Emission Factor for CO2 (kg/unit):</th><th>Enter Emission Factor for CH4 (kg/unit):</th><th>Enter Emission Factor for N2O (kg/unit):</th><th>Enter Emission Factor for SF6 (kg/unit):</th><th>Enter Emission Factor for CO2e (kg/unit):</th></tr><tr><td>Yes</td><td>Diesel</td><td>Litres</td><td>15000</td><td>2.68</td><td>0.0001</td><td>0.00005</td><td>0.00002</td><td>2.85</td></tr><tr><td>Yes</td><td>Natural Gas</td><td>Cubic Meters</td><td>100000</td><td>1.90</td><td>0.00008</td><td>0.00004</td><td>0.00001</td><td>2.05</td></tr></table><h4 class="subcategory">Industrial Processes</h4><table width="100%"> <tr><th>Does your company have industrial processes that emit greenhouse gases?</th><th>Select type of industrial process?</th><th>Select emission source:</th><th>Annual production quantity (in kilograms)?</th></tr><tr><td>Yes</td><td>Cement Manufacturing</td><td>Clinker Production</td><td>250000</td></tr><tr><td>Yes</td><td>Steel Production</td><td>Coke Combustion</td><td>180000</td></tr></table><h4 class="subcategory">Fugitive Emissions</h4><table width="100%"> <tr><th>Does your company use refrigerants, air conditioning, or fire suppression systems?</th><th>Type and quantity of refrigerants used? (HFC-134a, SF₆, etc.)</th><th>Any fugitive emissions from gas pipelines or equipment?</th></tr><tr><td>Yes</td><td>HFC-134a</td><td>Refrigeration Systems</td></tr></table></td>
+        <th class="mainhead" style="width: 6%; background-color: #f2f2f2;">Q.No</th>
+        <th class="mainhead" style="width: 30%; background-color: #f2f2f2;">Field Name</th>
+        <th class="mainhead" style="width: 64%; background-color: #f2f2f2;">Report</th>
       </tr>
+    </thead>
+  
+    <tbody>
+      <!-- Repeatable Rows -->
+      
       <tr>
-        <td>Scope 2: Indirect Emissions</td>
-        <td><h4 class="subcategory">Purchased Electricity</h4><table width="100%"> <tr><th>Total annual electricity consumption? (kWh)</th><th>Grid electricity or renewable sources?</th></tr><tr><td>5000</td><td>mixed</td></tr></table><h4 class="subcategory">Purchased Steam, Heat, or Cooling</h4><table width="100%"> <tr><th>Total annual steam/heat/cooling consumption? (in GJ or MWh)</th><th>Select consumption unit</th><th>Emission factor used for steam/heat/cooling? (kg CO₂e per selected unit)</th><th>Are transmission and distribution losses considered? (Yes/No)</th><th>If yes, what is the % loss factor?</th></tr><tr><td>8500</td><td>MWh</td><td>120</td><td>Yes</td><td>10</td></tr></table></td>
+        <td>14</td>
+        <td>Details of Business Activities</td>
+        <td>ABC Holdings Ltd. specializes in manufacturing and distributing eco-friendly paints and energy-efficient refrigerators. With a strong focus on sustainability, the company integrates responsible business conduct, energy-efficient practices, and circular economy principles into its operations. Key initiatives include waste reduction programs, renewable energy adoption, and ESG-driven product development.</td>
       </tr>
+    
       <tr>
-        <td>Scope 3: Value Chain Emissions</td>
-        <td><h4 class="subcategory">Purchased Goods Services</h4><table width="100%"> <tr><th>Select the product or material purchased</th><th>Select unit of quantity</th><th>Total quantity purchased(in selected unit)?</th></tr><tr><td>Steel</td><td>Kg</td><td>15000</td></tr><tr><td>Solar Panels</td><td>Unit</td><td>50</td></tr></table><h4 class="subcategory">Fuel & Energy-Related Emissions (Upstream)</h4><table width="100%"> <tr><th>Any upstream fuel emissions considered? (Fuel extraction, refining, transportation)</th><th>Transmission losses for purchased electricity accounted for?</th></tr><tr><td>Yes</td><td>Yes, Adani has worked to reduce distribution losses to 5.93%</td></tr></table><h4 class="subcategory">Transportation & Distribution</h4><table width="100%"> <tr><th>Does your company transport raw materials, products, or employees?</th><th>Total distance covered by company transport annually? (km/miles)</th><th>Transport mode? (Truck, Rail, Ship, Air)</th><th>Fuel type and consumption per transport mode?</th><th>Emissions from third-party logistics?</th></tr><tr><td>Yes</td><td>50 million km (Estimated for testing).</td><td>Truck, Rail, and Electric ITVs​</td><td>CNG Vehicles: Used in primary and secondary transport. Electric ITVs: 338 units deployed, reducing emissions by 811 tCO₂e/month</td><td>Yes, third-party logistics emissions are estimated based on distance and fuel consumption.</td></tr></table><h4 class="subcategory">Waste Generation</h4><table width="100%"> <tr><th>Annual waste generated? (Tons)</th><th>Breakdown by disposal method? (Landfill, Incineration, Recycling, Composting)</th><th>Emission factors for waste disposal used?</th></tr><tr><td>10,930,637 metric tons in FY 2022-23</td><td>0.25 kg CO₂e per kg of landfill waste.</td><td>Not answered</td></tr></table><h4 class="subcategory">Business Travel</h4><table width="100%"> <tr><th>How many business trips occurred in the reporting year?</th><th>Transport mode used for business travel? (Air, Train, Car, Bus)</th><th>Total distance traveled by employees for business purposes? (km/miles)</th><th>Accommodation nights stayed?</th></tr><tr><td>5,000 trips</td><td>Train and Car for local travel.</td><td>2 million km.</td><td>10000 nights</td></tr></table><h4 class="subcategory">Employee Commuting</h4><table width="100%"> <tr><th>Number of employees commuting daily?</th><th>Primary transport modes used by employees?</th><th>Average commuting distance per employee? (km/miles per day)</th><th>Fuel consumption or emission factor used per commute mode?</th></tr><tr><td>50000</td><td>Company EV fleet, public transport, and carpooling​</td><td> 20 km per day</td><td>0.12 kg CO₂e/km.</td></tr></table><h4 class="subcategory">Use of Sold Products</h4><table width="100%"> <tr><th>Select Product/Service</th><th>Number of units sold</th><th>Do the products require energy consumption in their lifetime?</th><th>If Yes, enter average energy use per product (in kWh/year)</th><th>Expected lifetime of the product (in years)</th></tr><tr><td>Electronics</td><td>1000</td><td>Yes</td><td>200</td><td>5</td></tr><tr><td>Clothing</td><td>2000</td><td>No</td><td>Not answered</td><td>Not answered</td></tr></table><h4 class="subcategory">End-of-Life Treatment of Sold Products</h4><table width="100%"> <tr><th>Select Product/Service</th><th>Enter Estimated Quantity Disposed</th><th>Select Unit for Quantity</th><th>Add Treatment Methods & Percentages</th></tr><tr><td>Copper</td><td>1000</td><td>kg</td><td>[object Object],[object Object]</td></tr><tr><td>Solar Panels</td><td>120</td><td>units</td><td>[object Object],[object Object]</td></tr></table><h4 class="subcategory">Leased Assets, Franchises, and Investments</h4><table width="100%"> <tr><th>Do you lease assets or facilities?</th><th>Do you have franchises that contribute to emissions?</th><th>Do you invest in projects with carbon emissions?</th></tr><tr><td>Yes</td><td>Yes, franchise-operated logistics contribute to Scope 3 emissions.</td><td>Yes, investments in thermal power, green hydrogen, and ammonia co-firing projects​</td></tr></table></td>
+        <td>15</td>
+        <td>Products sold / Services offered by the entity</td>
+        <td>
+              <table style="width: 100%; border-collapse: collapse;" border="1">
+                <thead>
+                  <tr>
+                    <th style="padding: 5px;">Product</th>
+                    <th style="padding: 5px;">Annual Revenue</th>
+                    <th style="padding: 5px;">NIC Code</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                        <tr>
+                          <td style="padding: 5px;">Paint</td>
+                          <td style="padding: 5px;">5040000</td>
+                          <td style="padding: 5px;">20221</td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 5px;">Refrigerators</td>
+                          <td style="padding: 5px;">350000</td>
+                          <td style="padding: 5px;">27121</td>
+                        </tr>
+                </tbody>
+              </table>
+            </td>
       </tr>
+    
       <tr>
-        <td>EPR</td>
-        <td><h4 class="subcategory">Extended Producer Responsibility (EPR) Plan</h4><table width="100%"> <tr><th>Does your company have an Extended Producer Responsibility plan in place? – If yes, please describe the collection system, processing practices, and measures taken to ensure compliance.</th></tr></table></td>
+        <td>18</td>
+        <td>Details of employees and workers</td>
+        <td>
+            <h3>Employees</h3>
+            <table width="100%" border="1" style="border-collapse: collapse;">
+              <thead>
+                <tr>
+                  <th>Male</th>
+                  <th>Female</th>
+                  <th>Other</th>
+                  <th>Total Employees</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>11</td>
+                  <td>9</td>
+                  <td>0</td>
+                  <td>20</td>
+                </tr>
+              </tbody>
+            </table>
+        
+            <h3>Employment Type</h3>
+            <table width="60%" border="1" style="border-collapse: collapse; margin-bottom: 10px;">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                      <tr>
+                        <td>permanent</td>
+                        <td>18</td>
+                      </tr>
+                      <tr>
+                        <td>Interns</td>
+                        <td>2</td>
+                      </tr>
+              </tbody>
+            </table>
+        
+            <p><strong>Total Differently Abled Employees:</strong> 0</p>
+        
+            <hr style="margin: 20px 0;">
+        
+            <h3>Workers</h3>
+            <table width="100%" border="1" style="border-collapse: collapse;">
+              <thead>
+                <tr>
+                  <th>Male</th>
+                  <th>Female</th>
+                  <th>Other</th>
+                  <th>Total Workers</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>10</td>
+                  <td>5</td>
+                  <td>0</td>
+                  <td>15</td>
+                </tr>
+              </tbody>
+            </table>
+        
+            <h3>Employment Type</h3>
+            <table width="60%" border="1" style="border-collapse: collapse; margin-bottom: 10px;">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                      <tr>
+                        <td>permanent</td>
+                        <td>12</td>
+                      </tr>
+                      <tr>
+                        <td>contractual</td>
+                        <td>3</td>
+                      </tr>
+              </tbody>
+            </table>
+        
+            <p><strong>Total Differently Abled Workers:</strong> 0</p>
+          </td>
       </tr>
+    
       <tr>
-        <td>LCA</td>
-        <td><h4 class="subcategory">Life Cycle Assessment (LCA) Details</h4><table width="100%"> <tr><th>Have you conducted a Life Cycle Assessment for any of your major products or services?   – Please specify the assessment boundary (cradle-to-grave, cradle-to-gate, etc.), key environmental impacts identified, and improvement actions.</th></tr></table></td>
+        <td>19</td>
+        <td>Participation /inclusion /representation of women(including differently abled)</td>
+        <td>
+            <ul style="padding-left: 20px;">
+              <li>Total Directors on the Board: <strong>10</strong></li>
+              <li>Total number of women on the Board of Directors: <strong>3</strong></li>
+              <li>Total number of directors (any gender) who are differently abled: <strong>1</strong></li>
+              <li>Total number of women directors who are differently abled: <strong>0</strong></li>
+              <li>Total number of women in Key Managerial Personnel (KMP) roles: <strong>2</strong></li>
+              <li>KMP designations held by: <strong>Chief Financial Officer (CFO), Company Secretary (CS)</strong></li>
+              <li>Total number of differently abled persons (any gender) in KMP: <strong>1</strong></li>
+              <li>Total number of women in KMP roles who are differently abled: <strong>0</strong></li>
+              <li>Does the company have affirmative hiring for women or differently abled persons?: <strong>Yes</strong></li>
+            </ul>
+          </td>
       </tr>
+    
       <tr>
-        <td>EIA</td>
-        <td><h4 class="subcategory">Environmental Impact Assessment</h4><table width="100%"> <tr><th>Has your company carried out an Environmental Impact Assessment (EIA) for your operations?   – Describe the methodology used, key findings, and any mitigation or adaptation measures implemented.</th></tr></table></td>
+        <td>20</td>
+        <td>Turnover rate for permanent employees and workers</td>
+        <td>
+            <table width="100%" border="1" style="border-collapse: collapse;">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Total</th>
+                  <th>Male</th>
+                  <th>Female</th>
+                  <th>Other Gender Identities</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Permanent Employees Who Left</td>
+                  <td>135</td>
+                  <td>90</td>
+                  <td>42</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td>Permanent Workers (Contractual, etc.) Who Left</td>
+                  <td>310</td>
+                  <td>270</td>
+                  <td>38</td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td>Overall Employee Turnover Rate (%)</td>
+                  <td>8.5%</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>Worker Turnover Rate (%)</td>
+                  <td>12.3%</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
       </tr>
+    
       <tr>
-        <td>Waste Management Practices</td>
-        <td><h4 class="subcategory">Waste Management Practices</h4><table width="100%"> <tr><th>What are your detailed waste management practices?   – Provide data on total waste generated, breakdown by disposal method (landfill, incineration, recycling, composting), and any related emission factors.</th></tr></table></td>
+        <td>21</td>
+        <td>Details of Holding / Subsidiary / Associate Companies / Joint Ventures</td>
+        <td>
+           
+            <table width="100%" border="1" style="border-collapse: collapse;">
+              <thead>
+                <tr>
+                  <th>Entity Type</th>
+                  <th>Name(s)</th>
+                  <th>Percentage of Ownership/Control</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Holding Company</b></td>
+                  <td>ABC Holdings Ltd.</td>
+                  <td>75</td>
+                </tr>
+                
+                    <tr>
+                      <td><b>Subsidiary Companies</b></td>
+                      <td>XYZ Technologies Pvt. Ltd<br>LMN Solutions Ltd</td>
+                      <td>100<br>80</td>
+                    </tr>
+                
+                    <tr>
+                      <td><b>Associate Companies</b></td>
+                      <td>PQR Innovations Ltd</td>
+                      <td>40</td>
+                    </tr>
+                
+                    <tr>
+                      <td><b>Joint Ventures (JVs)</b></td>
+                      <td>DEF Infra JV<br>GHI Tech JV</td>
+                      <td>50<br>45</td>
+                    </tr>
+              </tbody>
+            </table>
+          </td>
       </tr>
+    
       <tr>
-        <td>Impact on Biodiversity</td>
-        <td><h4 class="subcategory">Impact on Biodiversity</h4><table width="100%"> <tr><th>Do your operations have any impact on biodiversity?  – If yes, detail the locations and extent of impact (e.g., habitat alteration, species affected), and outline any conservation or restoration initiatives.</th></tr></table></td>
+        <td>23</td>
+        <td>Grievance Redressal mechanism for stakeholders</td>
+        <td>
+            <ul style="padding-left: 20px;">
+              <li><strong>Grievance Mechanism for Employees:</strong> Yes</li>
+              <li><strong>Grievance Mechanism for Workers:</strong> Yes</li>
+              <li><strong>Grievance Channels Available:</strong> Internal grievance portal, HR email (grievance@company.com), 24x7 employee helpline</li>
+              <li><strong>Average Grievance Resolution Time:</strong> 5.8</li>
+              <li><strong>Tracking of Grievance Redressal Effectiveness:</strong> Yes</li>
+            </ul>
+          </td>
       </tr>
+    
       <tr>
-        <td>PAT Scheme</td>
-        <td><h4 class="subcategory">PAT Scheme Performance</h4><table width="100%"> <tr><th> Are any of your facilities designated under the Government’s Perform, Achieve and Trade (PAT) scheme?  – If yes, please provide information on targets, improvements in energy efficiency, and performance outcomes.</th></tr></table></td>
+        <td>24</td>
+        <td>Overview of the entity’s material responsible business conduct and sustainability issues</td>
+        <td>
+            <ul style="padding-left: 20px;">
+              <li><strong>Environmental Risks Identified:</strong> Yes
+                <ul><li><strong>Key risks:</strong> Water scarcity in operational areas, Disruption due to extreme weather events , Supply chain emissions and raw material shortages</li></ul>
+              </li>
+              <li><strong>Social Risks Identified:</strong> Yes
+                <ul><li><strong>Key risks:</strong>  Labor shortages due to migration,Community opposition in new project locations , Health and safety risks for workers</li></ul>
+              </li>
+              <li><strong>Governance Risks Identified:</strong> Yes
+                <ul><li><strong>Key risks:</strong>  Non-compliance with ESG disclosure norms ,Cybersecurity and data protection failures , Bribery and corruption in supply chain</li></ul>
+              </li>
+              <li><strong>ESG-Related Opportunities Identified:</strong> Yes
+                <ul><li><strong>Key opportunities:</strong>  Expansion into green product lines , Access to ESG-focused investment funds , Energy savings from renewable energy adoption</li></ul>
+              </li>
+            </ul>
+          </td>
       </tr>
+    
+    </tbody>
+  
+    <tfoot>
       <tr>
-        <td>Reclaimed Products & Packaging</td>
-        <td><h4 class="subcategory">Reclaimed Products & Packaging</h4><table width="100%"> <tr><th> What proportion of your products (and/or packaging materials) are reclaimed (reused, recycled, or disposed of safely) relative to total products sold?   – Describe the process and calculation methodology.</th></tr></table></td>
+        <td colspan="3" style="border-top: 1px solid black;"></td>
       </tr>
-      <tr>
-        <td>Additional Data for Carbon Accounting</td>
-        <td><h4 class="subcategory">Water Use & Wastewater Treatment</h4><table width="100%"> <tr><th>Total water consumption annually? (Liters/m³)</th><th>How is wastewater treated? (Aerobic, Anaerobic, Untreated)</th><th>What is the BOD and COD of wastewater?</th><th>Methane Correction Factor (MCF) for wastewater treatment used?</th><th>Nitrogen content in wastewater? (mg/L)</th></tr><tr><td> 158,854,879 KL (FY 2022-23)</td><td>follows wastewater recycling and reuse, adopting Zero Liquid Discharge (ZLD) principles.</td><td>BOD: 200 mg/L, COD: 500 mg/L.</td><td>0.8 (for anaerobic treatment) and 0.5 (for partially aerobic treatment).</td><td>35 mg/L</td></tr></table><h4 class="subcategory">Carbon Offset & Renewable Energy Purchases</h4><table width="100%"> <tr><th>Do you purchase carbon credits or offsets?</th><th>Amount of CO₂ offset annually? (Tons)</th><th>Do you have on-site renewable energy installations?</th><th>Capacity of installed renewable energy? (MW/kWh)</th></tr><tr><td>Yes</td><td>36.7 million tons CO₂</td><td>Yes, multiple sites use rooftop solar and wind energy​</td><td>Solar: 4.3 MW (AWL), 1.6 MW (Adani Solar), 3.4 MW (AESL) Wind: 45 GW projected capacity by 2030​</td></tr></table></td>
-      </tr>
-      <tr>
-        <td>Social</td>
-        <td><h4 class="subcategory">Workforce Composition & Diversity(Management & HR Data)</h4><table width="100%"> <tr><th>Total number of employees?</th><th>Breakdown of employees by gender?</th><th>Breakdown of employees by employment type?</th><th>Diversity ratio in leadership positions?</th><th>Does the company have a diversity & inclusion policy?</th><th>Percentage of employees from minority or underrepresented communities?</th><th>Does the company have equal opportunity hiring practices?</th><th>Is there an anti-discrimination and harassment policy?</th><th>Have there been any reported cases of workplace discrimination or harassment in the last year?</th></tr><tr><td>26349</td><td>Gender diversity hiring increased by 11% compared to the previous year​</td><td>Permanent employees: 24,014 Other than permanent employees: 2,335 Total workers (including contractual and temporary): 32,040​</td><td>15% women in leadership roles.</td><td>Yes, Adani has a Diversity, Equity & Inclusion (DEI) policy that guarantees equal treatment for all individuals​</td><td>20% of employees belong to underrepresented groups.</td><td>Yes, Adani follows fair and merit-based hiring practices, with a focus on increasing diversity​</td><td>Yes, Adani has an anti-discrimination policy, including a Prevention of Sexual Harassment (POSH) policy​</td><td>No reported cases of discrimination in the latest reporting year​</td></tr></table><h4 class="subcategory">Employee Well-being & Benefits(Employee Survey via GoodFoot)</h4><table width="100%"> <tr><th>How satisfied are you with your work-life balance?</th><th>Do you receive paid leave, maternity/paternity leave, and sick leave?</th><th>Does the company offer health insurance benefits?</th><th>Do you feel that your workplace provides mental health support?</th><th>Does your company offer employee assistance programs (EAPs)?</th><th>Does your workplace support flexible work arrangements (remote/hybrid)?</th><th>Does your company have safety policies and training in place?</th></tr><tr><td>Employees reported moderate satisfaction with work-life balance, with ongoing improvements in flexible work arrangements</td><td>Yes, Adani provides maternity leave (as per Maternity Benefit Act, 1961) and paternity leave (6 days paid leave)​</td><td>Yes, employees receive comprehensive health insurance, accident insurance, and family benefits​</td><td>Yes, through the Emotional Wellness Program and Employee Assistance Program (EAP), which offers confidential counseling</td><td>Yes, employees and their families have access to 24/7 mental health and well-being support via ICAS India​</td><td>Yes, flexible work options are available, but primarily for corporate and technology-based roles.</td><td>Yes, the company has a comprehensive safety training program for employees and contractors​</td></tr></table><h4 class="subcategory">Training & Career Development(HR & Employee Survey via GoodFoot)</h4><table width="100%"> <tr><th>How many hours of training does each employee receive annually?</th><th>Does the company have a structured career development plan?</th><th>Does the company offer mentorship programs?</th><th>How often do employees receive performance evaluations?</th><th>Do employees receive support for further education/certifications?</th></tr><tr><td>Employees receive an average of 40-60 hours of training per year​</td><td>Yes, Adani offers career growth programs, leadership training, and mentorship initiatives​</td><td>Yes, the company has apex mentorship programs impacting 1,500+ employees annually</td><td>Employees undergo bi-annual performance evaluations to ensure career growth and alignment with company goals</td><td> Yes, employees have access to education scholarships, training sponsorships, and tuition assistance for higher studies</td></tr></table><h4 class="subcategory">Employee Health & Safety (Management & Compliance Data)</h4><table width="100%"> <tr><th>Has the company reported any workplace injuries or fatalities in the last year?</th><th>Does the company conduct regular health and safety audits?</th><th>Are there first-aid facilities available on-site?</th><th>Does the company have a disaster preparedness plan?</th><th>What is the frequency of fire and emergency drills?</th><th>Does the company provide Personal Protective Equipment (PPE) to employees?</th></tr><tr><td>Yes</td><td>Yes, Adani conducts safety risk field audits (SRFA) and vulnerability safety risk (VSR) assessments</td><td> Yes, round-the-clock medical staff, first-aid facilities, and ambulances are provided at operational sites​</td><td> Yes, Adani has business continuity planning (BCP) and crisis management plans to address unforeseen events​</td><td>Fire drills and emergency preparedness exercises are conducted quarterly.</td><td>Yes, PPE is provided as part of workplace safety compliance​</td></tr></table><h4 class="subcategory">Human Rights & Fair Wages (Management & HR Data)</h4><table width="100%"> <tr><th>Does the company ensure no child labor or forced labor in operations?</th><th>What is the minimum wage for employees?</th><th>Does the company ensure gender pay equity?</th><th>Are third-party suppliers audited for ethical labor practices?</th><th>Does the company support freedom of association and unionization?</th></tr><tr><td>Yes</td><td>All employees are paid above the legal minimum wage, varying by location</td><td>Yes, Adani is committed to fair compensation and gender pay equity across all roles</td><td>Yes, Adani conducts audits and compliance assessments for supplier labor standards</td><td>Yes, employees are allowed to participate in labor unions and worker associations​</td></tr></table><h4 class="subcategory">Community Development & CSR (Management Data)</h4><table width="100%"> <tr><th>Does the company have a Corporate Social Responsibility (CSR) policy?</th><th>How much did the company spend on CSR initiatives in the last financial year?</th><th>What are the key focus areas of CSR?</th><th>How many people were directly impacted by CSR programs?</th></tr><tr><td>Yes</td><td>₹1,033 crore was allocated for CSR activities in FY 2022-23​</td><td>Education and Skill Development,Healthcare and Nutrition,Sustainable Livelihoods,Environment Conservation,Disaster Response​</td><td>Over 5.7 million people benefited from CSR initiatives​</td></tr></table><h4 class="subcategory">Ethical Supply Chain & Procurement (Management & Vendor Data)</h4><table width="100%"> <tr><th>Does the company have a sustainable procurement policy?</th><th>What percentage of suppliers comply with ethical labor and environmental standards?</th><th>Are suppliers audited for human rights compliance?</th><th>Are procurement decisions influenced by social and environmental considerations?</th></tr><tr><td>Yes</td><td>93% of critical suppliers engaged in ESG disclosure programs​</td><td>Yes, all suppliers undergo ESG screening and risk assessment during onboarding​Adani ESG 2023</td><td>Yes, sustainability ranking is integrated into procurement decisions, and suppliers are required to meet environmental and social KPIs​</td></tr></table><h4 class="subcategory">Customer Responsibility & Data Privacy (Management & IT Data)</h4><table width="100%"> <tr><th>Does the company have a data protection and privacy policy?</th><th>Has there been any data breach incident in the last year?</th><th>Does the company provide clear product labeling and ethical advertising?</th><th>Does the company have customer grievance redressal mechanisms?</th><th>What is the company’s Net Promoter Score (NPS) for customer satisfaction?</th></tr><tr><td>Yes</td><td> No substantiated incidents of data breaches were reported in FY 2022-23</td><td>Yes, Adani ensures transparent product labeling and compliance with ethical advertising standards​</td><td>Yes, Adani operates a customer grievance redressal tool for managing and addressing customer concerns</td><td>Adani maintains a high NPS, reflecting strong customer engagement and satisfaction.</td></tr></table><h4 class="subcategory">Employee Engagement & Workplace Culture (Employee Survey via GoodFoot)</h4><table width="100%"> <tr><th>Do you feel valued at work?</th><th>Does your company encourage employee volunteering?</th><th>How often does the company conduct employee engagement activities?</th><th>Would you recommend your company as a great place to work?</th></tr><tr><td>Yes</td><td>Yes,  supports community volunteering programs as part of its CSR efforts</td><td>Engagement programs occur quarterly, including team-building exercises, wellness workshops, and leadership discussions.</td><td>Yes, employees highly appreciate Adani's commitment to career growth and sustainability.</td></tr></table><h4 class="subcategory">ESG & Climate Awareness (Employee Survey via GoodFoot & Management)</h4><table width="100%"> <tr><th>Does the company provide training on sustainability and ESG goals?</th><th>Are employees aware of their role in reducing the company’s carbon footprint?</th><th>Does the company encourage green commuting (carpooling, EVs, biking)?</th></tr><tr><td>Yes</td><td>Yes, Adani actively educates employees about reducing emissions and sustainable practices​</td><td>Yes, Adani promotes EV adoption and carpooling initiatives to lower transportation emissions</td></tr></table><h4 class="subcategory">Grievance Redressal Mechanism for Stakeholders</h4><table width="100%"> <tr><th>What structured mechanisms are in place to address grievances from various stakeholder groups (including employees, communities, suppliers, and customers)?   – Describe the process, accessibility, channels, and any quantitative data on grievances received and resolved.</th></tr></table><h4 class="subcategory">Product Safety & Recalls</h4><table width="100%"> <tr><th>Have there been any instances of product recalls on account of safety issues? – If yes, please provide details on the number of recalls, reasons for the recall, remedial actions taken, and any customer compensation measures.</th></tr></table><h4 class="subcategory">Channels for Accessing Product Information</h4><table width="100%"> <tr><th>Through which channels or platforms can stakeholders access detailed and updated information about your goods and services? – List your official website, mobile apps, social media pages, e‑commerce portals, or customer helplines. Include details on language availability or accessibility features if applicable.</th></tr></table><h4 class="subcategory">Director’s Statement on ESG (Social Focus)</h4><table width="100%"> <tr><th>Please provide the statement from the director responsible for the ESG report. – The statement should outline your company’s social vision, key priorities, challenges, and performance highlights for the reporting period.</th></tr></table><h4 class="subcategory">Details of Fines, Penalties, Awards, & Settlements</h4><table width="100%"> <tr><th>Has your company incurred any fines, penalties, received awards, or entered into settlements related to social or ethical issues during the reporting period?  – Provide amounts, reasons, and any corrective actions taken.</th></tr></table><h4 class="subcategory">Overview of Material Responsible Business Conduct Issues</h4><table width="100%"> <tr><th>What are the major social risks and opportunities related to responsible business conduct?   – Explain the nature of these issues, their potential impact on your business, and any mitigation strategies in place.</th></tr></table><h4 class="subcategory">Social Impact Assessments (SIA)</h4><table width="100%"> <tr><th>Have you conducted Social Impact Assessments for any projects or operational changes?  – Describe the methodologies, key findings, and how the insights have informed your policies or practices.</th></tr></table><h4 class="subcategory">Public Policy Positions on ESG Matters</h4><table width="100%"> <tr><th>Does your company advocate specific public policy positions related to social or sustainability issues?  – If yes, detail the positions, the rationale behind them, and any active engagement with policymakers.</th></tr></table></td>
-      </tr>
-      <tr>
-        <td>Governance</td>
-        <td><h4 class="subcategory">Board Structure & Leadership</h4><table width="100%"> <tr><th>Total number of board members?</th><th>Number of Independent Directors?</th><th>Number of Women Directors on the board?</th><th>Average age of board members?</th><th>Does the board include members from diverse backgrounds (industry expertise, gender, ethnicity, etc.)?</th><th>Does the company have a Board Diversity Policy?</th><th>How often does the board meet annually?</th><th>Is the board remuneration linked to ESG performance?</th></tr><tr><td>typically between 7 and 12</td><td> Independent Directors constitute at least one-third of the total board members, typically five Independent Directors per board</td><td>At least 2 women directors</td><td>approximately 55 years</td><td>Yes, Adani ensures board diversity, including a range of expertise in finance, risk management, global markets, and sustainability​Adani ESG 2023</td><td>Yes, Adani has a formal Board Diversity Policy that governs nominations and selections​</td><td>The board typically meets four to six times per year.</td><td>Yes, board remuneration is structured under a governance policy that aligns with performance, including ESG-linked targets</td></tr></table><h4 class="subcategory">Board Committees & Responsibilities</h4><table width="100%"> <tr><th>Does the company have the following mandatory committees? (Audit, Nomination & Remuneration, CSR, Stakeholder Relationship, Risk Management)</th><th>Does the company have a separate ESG Committee?</th><th>How frequently do these committees meet?</th><th>Are the meeting minutes publicly disclosed?</th></tr><tr><td>Yes</td><td> Yes, the Corporate Responsibility Committee (CRC), comprising Independent Directors, oversees ESG-related matters​Adani ESG 2023</td><td>Most committees meet quarterly, while some meet more frequently based on business needs.</td><td>Yes, committee charters and key decisions are publicly disclosed in corporate governance reports​</td></tr></table><h4 class="subcategory">Business Ethics & Anti-Corruption</h4><table width="100%"> <tr><th>Does the company have a Code of Conduct for employees and directors?</th><th>Has the company adopted an Anti-Bribery and Anti-Corruption Policy?</th><th>Has the company conducted any anti-corruption training in the last year?</th><th>Have there been any reported cases of bribery, fraud, or corruption?</th><th>What percentage of employees have signed the Code of Conduct?</th><th>Are there whistleblower mechanisms in place?</th><th>How many whistleblower complaints were received in the last year?</th></tr><tr><td>Yes</td><td>Yes, Adani enforces a zero-tolerance policy on bribery, corruption, and unethical practices​Adani ESG 2023</td><td>Yes, all employees undergo anti-corruption training at the time of joining and periodically thereafter​Adani ESG 2023.</td><td>No, zero cases of bribery, fraud, or corruption were reported in FY 2022-23</td><td>100% of employees are required to sign and comply with the Code of Conduct upon joining</td><td>Yes, Adani has a Whistleblower Policy, ensuring a secure mechanism for reporting concerns​</td><td>A total of five whistleblower complaints were reported and addressed.</td></tr></table><h4 class="subcategory">Ris& Compliance</h4><table width="100%"> <tr><th>Does the company have a formal Enterprise Risk Management (ERM) framework?</th><th>Does the company conduct regular risk assessments?</th><th>What are the top 5 material risks identified by the company?</th><th>Are climate-related risks integrated into risk management?</th><th>Does the company have a Business Continuity Plan (BCP)?</th><th>Has the company faced any regulatory non-compliance issues in the last 3 years?</th></tr><tr><td>Yes</td><td> Yes, risk assessments are conducted periodically, covering strategic, operational, financial, regulatory, and ESG risks</td><td>limate Change and ESG Risks, Regulatory and Policy Risks ,Market and Financial Risks, Cybersecurity and Data Privacy Risks, Operational and Supply Chain Risks​</td><td>Yes, climate-related risks are actively monitored, with ESG assessments factored into the risk governance framework​</td><td>Yes, Adani has a Business Continuity Plan (BCP) to mitigate potential disruptions, including natural disasters, cyber-attacks, and regulatory challenges</td><td>No</td></tr></table><h4 class="subcategory">Data Protection & Cybersecurity</h4><table width="100%"> <tr><th>Does the company have a formal Data Privacy Policy?</th><th>Has the company implemented GDPR or India’s Digital Personal Data Protection Act (DPDPA)?</th><th>Does the company conduct cybersecurity audits?</th><th>Has the company experienced any data breaches in the past 3 years?</th><th>How frequently are employees trained on data protection?</th></tr><tr><td>Yes</td><td>Yes, Adani complies with India’s Digital Personal Data Protection Act (DPDPA) and international data security norms​</td><td>Yes, periodic cybersecurity audits are conducted across business units​</td><td> No significant data breaches were reported in FY 2022-23</td><td>Employees receive annual cybersecurity training with refresher courses every six months</td></tr></table><h4 class="subcategory">Corporate Social Responsibility (CSR) Governance</h4><table width="100%"> <tr><th>Has the company allocated 2% of its net profits to CSR as per the Companies Act 2013?</th><th>What are the key focus areas of CSR spending?</th><th>How many CSR projects were completed in the last year?</th><th>Does the company disclose CSR impact metrics?</th><th>Are CSR reports externally audited?</th></tr><tr><td>Yes</td><td>Education and Skill Development,Healthcare and Nutrition,Sustainable Livelihoods,Environmental Conservation,Disaster Relief & Response​</td><td>Over 100+ CSR projects were successfully implemented in FY 2022-23​</td><td>Yes, CSR impact metrics are disclosed annually in the Sustainability and ESG reports​</td><td>Yes, CSR reports are externally audited to ensure compliance and transparency​</td></tr></table><h4 class="subcategory">Stakeholder Engagement & Transparency</h4><table width="100%"> <tr><th>Does the company regularly engage with stakeholders (employees, customers, investors, suppliers, regulators, communities)?</th><th>What are the key channels for stakeholder communication? (AGM, ESG Reports, Investor Calls, Website Disclosures, Surveys & Feedback)</th><th>Does the company disclose its political contributions?</th><th>Does the company conduct materiality assessments for sustainability reporting?</th></tr><tr><td>Yes</td><td>Annual General Meetings (AGM),nvestor calls & financial disclosures,ESG Reports and Business Responsibility & Sustainability Reports (BRSR),Community and supplier engagement programs​</td><td>Adani follows regulatory requirements for political donations, but specific contributions are not publicly disclosed.</td><td>Yes</td></tr></table><h4 class="subcategory">Tax Transparency & Financial Integrity</h4><table width="100%"> <tr><th>Does the company disclose its tax payments by country?</th><th>Has the company faced any tax disputes in the last 5 years?</th><th>Does the company engage in aggressive tax planning or tax avoidance schemes?</th><th>Does the company provide Country-by-Country Reporting (CbCR)?</th></tr><tr><td>Yes</td><td>No significant tax disputes were reported in FY 2022-23.</td><td>Adani complies with domestic and international tax regulations and does not engage in aggressive tax planning.</td><td> Follows regulatory reporting requirements, but CbCR is not explicitly mentioned in public reports.</td></tr></table><h4 class="subcategory">ESG Reporting & Assurance</h4><table width="100%"> <tr><th>Does the company publish an annual ESG or Sustainability Report?</th><th>Is the ESG report externally assured?</th><th>What ESG reporting frameworks does the company follow? (GRI, SASB, TCFD, IR, Others)</th><th>Does the company disclose its Scope 1, 2, and 3 emissions?</th></tr><tr><td>Yes</td><td>Yes, all ESG data undergoes external third-party assurance to ensure accuracy and credibility​Adani ESG 2023</td><td>BRSR,GRI,TCFD,CDP,Dow Jones Sustainability Indices</td><td>Yes, Scope 1, Scope 2, and Scope 3 emissions are reported in sustainability disclosures​</td></tr></table><h4 class="subcategory">Governance of Sustainable Development Goals (SDGs)</h4><table width="100%"> <tr><th>Does the company align its business strategy with United Nations Sustainable Development Goals (SDGs)?</th><th>Which SDGs are actively tracked by the company?</th><th>Are SDG commitments reflected in executive KPIs and incentives?</th></tr><tr><td>Yes</td><td>Affordable and Clean Energy (SDG 7),Climate Action (SDG 13),Responsible Consumption and Production (SDG 12),Decent Work and Economic Growth (SDG 8)​</td><td>Yes, ESG and SDG-related performance indicators are linked to executive remuneration and strategic goals.</td></tr></table><h4 class="subcategory">Details of Holding/ Subsidiary/ Associate Companies/ Joint Ventures</h4><table width="100%"> <tr><th>Provide a complete list of all companies within your ESG reporting boundary, including holding, subsidiary, associate companies, and joint ventures.  – Include names, the nature of the relationship, and any relevant ESG data or risk exposures.</th></tr></table><h4 class="subcategory">Conflict of Interest Management for Board and KMPs</h4><table width="100%"> <tr><th>What processes or policies does your company have to avoid or manage conflicts of interest among Board members and Key Management Personnel?  – Describe formal guidelines, disclosure practices, and oversight mechanisms.</th></tr></table><h4 class="subcategory">Highest Authority & Oversight of ESG Policies</h4><table width="100%"> <tr><th>Who is the highest authority responsible for implementing and overseeing your ESG policies?  – Provide details such as the name, designation, and structure (e.g., Board committee composition) responsible for ESG governance.</th></tr></table><h4 class="subcategory">Director’s Statement on ESG (Governance Perspective)</h4><table width="100%"> <tr><th>In addition to the overall ESG statement, is there a governance-specific statement that addresses Board-level oversight and accountability for ESG performance?  – If yes, please include it.</th></tr></table></td>
-      </tr>
-      <tr>
-        <td>Assets</td>
-        <td><h4 class="subcategory">Biological Carbon Sinks</h4><table width="100%"> <tr><th>What is the name or unique identifier of the project?</th><th>What is the project location (country, region, GPS coordinates)?</th><th>What is the total area (in hectares or acres) allocated for the project?</th><th>Is the project focused on afforestation (new tree planting) or reforestation (restoring existing forests)?</th><th>Which tree species or mix of species are being planted?</th><th>What is the planting density (trees per hectare/acre)?</th><th>What is the estimated annual carbon absorption (in tons CO₂/year)?</th><th>What are the underlying assumptions (growth rate, survival rate, etc.) used in the carbon calculation?</th><th>What is the project start date and expected time to maturity or full carbon sequestration potential?</th><th>Is the project certified by any recognized carbon standard (e.g., Verified Carbon Standard, Gold Standard)?</th></tr><tr><td>Adani Trillion Trees Initiative​</td><td>India, with a focus on diverse project sites across operational areas​</td><td>Over 100 million trees planned by 2030, covering large-scale afforestation and reforestation zones​</td><td>Both afforestation and reforestation efforts are being implemented</td><td>Native species with high carbon sequestration potential, including mangroves, neem, bamboo, rosewood, and other local varieties​</td><td>Estimated 2,500 trees per hectare for high-density plantation.</td><td>Target: 100 million tons of CO₂ sequestered by 2030</td><td>Survival rate of 85%, growth period of 5-10 years, and sequestration factor of 22 kg CO₂ per tree annually.</td><td>Started in 2022, expected to reach full potential by 2030</td><td>Certification process under Gold Standard and Verra (VCS) is in progress.</td></tr></table><h4 class="subcategory">Agricultural & Soil Carbon Sequestration Initiatives</h4><table width="100%"> <tr><th>Which agricultural practices are being implemented (e.g., no-till farming, cover cropping, agroforestry, biochar application)?</th><th>What is the total area (hectares/acres) under these practices?</th><th>What are the baseline soil carbon levels, and what are the targeted increases over time?</th><th>What monitoring methods or technologies are used to measure changes in soil carbon content?</th><th>What is the estimated annual increase in soil carbon sequestration (tons CO₂/year)?</th></tr><tr><td>Agroforestry, soil regeneration, and biochar application</td><td>50000</td><td>Baseline soil organic carbon: 1.2%; Target increase: 2% over 10 years.</td><td>Satellite imagery, soil sensors, and remote sensing technology​</td><td>Estimated 2.5 million tons CO₂ per year.</td></tr></table><h4 class="subcategory">Blue Carbon Assets</h4><table width="100%"> <tr><th>What type of blue carbon asset is being managed (e.g., mangroves, salt marshes, seagrass beds)?</th><th>What is the geographic location and total area (hectares/acres) of the ecosystem?</th><th>Is the asset under a restoration, conservation, or management program?</th><th>What specific actions are being taken (e.g., replanting, hydrological restoration, invasive species control)?</th><th>What is the estimated carbon absorption rate (tons CO₂/year)?</th></tr><tr><td>Mangrove restoration projects​Adani ESG 2023</td><td>Coastal zones of Gujarat and Andhra Pradesh, covering over 5,000 hectares​</td><td>Yes, actively managed through conservation and afforestation</td><td>Replanting, tidal hydrology restoration, and biodiversity protection​</td><td>Estimated 8-12 tons CO₂ per hectare per year.</td></tr></table><h4 class="subcategory">Technological Carbon Capture Assets</h4><table width="100%"> <tr><th>What is the technology type or model of the Direct Air Capture (DAC) system?</th><th>Who is the manufacturer or technology provider?</th><th>What is the current CO₂ capture capacity (tons CO₂/year)?</th><th>What energy source(s) does the system use (renewable, grid, hybrid)?</th><th>What are the key performance indicators and monitoring procedures?</th><th>What type of Carbon Capture and Storage (CCS) / Carbon Capture, Utilization, and Storage (CCUS) technology is implemented?</th><th>What is the source of CO₂ being captured (industrial point source, power plant, etc.)?</th><th>What are the storage or utilization plans for the captured CO₂?</th><th>Is the project audited or certified by any standards?</th></tr><tr><td>Carbon Capture and Storage (CCS) pilot projects​Adani ESG 2023.</td><td>Partnering with global CCS technology providers.</td><td>Estimated 500,000 tons CO₂ per year.</td><td>Green hydrogen and renewable power​Adani ESG 2023.</td><td>CO₂ capture efficiency (95% capture rate),Energy consumption per ton of CO₂ captured,System uptime and reliability metrics.</td><td>Carbon capture combined with e-methanol production from green hydrogen​</td><td> Industrial processes, cement kilns, and power plants​</td><td> Utilized in manufacturing of PVC and other long-lived materials​</td><td>Certification under Verra VCS and Gold Standard is in progress.</td></tr></table><h4 class="subcategory">Carbon Credit Portfolios & Offsets</h4><table width="100%"> <tr><th>What type(s) of carbon credits or offsets does the company hold (e.g., forestry, renewable energy, avoided deforestation)?</th><th>What is the total volume of carbon credits (in tons CO₂ equivalent)?</th><th>What projects or initiatives are the credits associated with?</th><th>Which certification bodies or standards verify these credits?</th><th>What is the validity period or expiration date of these credits?</th><th>How are these credits integrated into the company’s overall carbon accounting?</th></tr><tr><td>Renewable energy and forestry-based carbon credits</td><td>Estimated 10 million tons CO₂e in credits.</td><td>Wind and solar energy projects,Afforestation and reforestation initiatives,Energy efficiency and industrial waste management​</td><td>Gold Standard and Verified Carbon Standard (VCS)</td><td>The credits are valid for 10 to 15 years, with periodic verification cycles.</td><td>Used to offset operational carbon footprint,Incorporated in sustainability disclosures and ESG reporting,Utilized for regulatory compliance and voluntary commitments​EmissionFactorController.</td></tr></table><h4 class="subcategory">Emerging Carbon Mineralization and Other Innovative Assets</h4><table width="100%"> <tr><th>What type of carbon mineralization or innovative CO₂ absorption technology is being used?</th><th>What is the underlying mechanism for CO₂ conversion or storage?</th><th>What is the estimated CO₂ capture or sequestration capacity (tons CO₂/year)?</th><th>What are the energy/resource requirements and associated efficiencies?</th><th>What methods are used to monitor performance and ensure permanence of carbon storage?</th><th>Are there any certifications, partnerships, or academic validations supporting the technology?</th></tr><tr><td>Carbon mineralization using alkaline industrial by-products</td><td> Reaction of CO₂ with magnesium and calcium-rich minerals to form stable carbonates​</td><td>Estimated 1 million tons CO₂ per year.</td><td>Energy Source: Green hydrogen and renewable energy-powered operations. Efficiency: 80-90% conversion rate for mineral-based CO₂ sequestration​FuelCombustion.</td><td>Geochemical modeling and remote sensing for tracking mineralization. Third-party verification of CO₂ sequestration through periodic sampling</td><td>Collaboration with leading universities and industrial research groups for third-party verification and certification.</td></tr></table><h4 class="subcategory">Additional General Questions (Applicable Across Asset Types)</h4><table width="100%"> <tr><th>What is the baseline measurement for carbon absorption or sequestration?</th><th>How frequently is performance data collected and verified (internally or by third parties)?</th><th>What are the key risks associated with the asset (e.g., climate variability, technological obsolescence)?</th><th>What contingency or risk mitigation measures are in place?</th><th>What is the capital investment for the asset?</th><th>What are the operational costs and expected financial returns (if any) related to carbon absorption?</th><th>How is the asset’s performance reported (e.g., annual sustainability report, ESG dashboard)?</th><th>Who are the stakeholders or partners involved in the project?</th></tr><tr><td>Baseline measurements vary by project, but typically include initial soil organic carbon levels, forest biomass density, and historical emission benchmarks.</td><td> Quarterly internal monitoring with annual third-party verification for compliance with international carbon accounting standards​</td><td>Climate Change Impacts (e.g., droughts, storms affecting afforestation projects).</td><td>Diversified Carbon Portfolio (mix of nature-based and technology-based solutions).</td><td>Investment varies by asset type, with Direct Air Capture (DAC) systems requiring $300–500 million per plant, and afforestation projects requiring $5,000 per hectare.</td><td>Operational Costs: $10–50 per ton of CO₂ captured,Financial Returns: Revenue from carbon credit sales, regulatory incentives, and ESG-aligned investments​fuelCombustionController.</td><td>Annual sustainability report, carbon accounting disclosures, and real-time monitoring via ESG dashboards​fuelCombustionController.</td><td>Universities & Research Institutions ,Regulatory Agencies ,Corporate Partners</td></tr></table></td>
-      </tr>
-      <tr>
-        <td>Renewable Project</td>
-        <td><h4 class="subcategory">General Project Details</h4><table width="100%"> <tr><th>Project Name</th><th>Project Location</th><th>Type of Renewable Energy</th><th>Installed Capacity (MW)</th><th>Annual Energy Generation (MWh/year)</th><th>Operational Status</th><th>Commissioning Year</th></tr><tr><td>Adani Green Energy Ltd. (AGEL) Solar and Wind Hybrid Project</td><td>India – Rajasthan and Gujarat​</td><td>Solar, Wind, and Hybrid Energy​</td><td>20,434 MW operational renewable energy capacity</td><td>Estimated 49 TWh (terawatt-hours) per year​</td><td>Operational, with ongoing capacity expansion​fuelCombustionController</td><td>First projects commissioned in 2015, with new additions in 2023​</td></tr></table><h4 class="subcategory">Environmental & Carbon Impact</h4><table width="100%"> <tr><th>Total Carbon Savings (tCO₂e/year)</th><th>Grid-Connected or Off-Grid?</th><th>Does the project have Renewable Energy Certificates (RECs)?</th><th>Emission Factor Used (kgCO₂e/kWh)</th></tr><tr><td>Approximately 39.2 million tCO₂e saved per year</td><td>Grid-connected, integrated into India's national power grid.</td><td>Yes, the project is eligible for RECs and participates in trading markets.</td><td> 0.71 kg CO₂e/kWh (India’s average grid emission factor)</td></tr></table><h4 class="subcategory">Financial & Ownership</h4><table width="100%"> <tr><th>Investment Cost (INR or USD)</th><th>Funding Type</th><th>Ownership Model</th><th>Expected ROI Period (Years)</th></tr><tr><td> USD 22 billion investment plan for renewable expansion</td><td>Equity, Green Bonds, and Climate Investment Funds</td><td>Owned by Adani Green Energy Ltd. (AGEL), with institutional investors such as TotalEnergies​fuelCombustionController</td><td>Estimated return on investment (ROI) within 8-12 years.</td></tr></table><h4 class="subcategory">Compliance & Certifications</h4><table width="100%"> <tr><th>Is the project certified under any standards?</th><th>Does the project contribute to the company's RE100 target?</th></tr><tr><td> Certified under ISO 14001, VCS (Verified Carbon Standard), and Gold Standard​fuelCombustionController.</td><td>Yes, Adani aims for 45 GW renewable capacity by 2030, aligning with RE100 commitments​fuelCombustionController.</td></tr></table><h4 class="subcategory">Additional Information</h4><table width="100%"> <tr><th>Challenges Faced in Implementation</th><th>Future Expansion Plans?</th><th>Any Government Subsidy or Incentives Received?</th></tr><tr><td>Grid connectivity challenges</td><td>Yes, expanding total capacity to 45 GW by 2030​fuelCombustionController.</td><td>Yes, benefits from India’s Production-Linked Incentive (PLI) scheme for solar and wind energy​</td></tr></table></td>
-      </tr></table></body></html>
+    </tfoot>
+  </table>
+      
+      </body>
+    </html>
+  
