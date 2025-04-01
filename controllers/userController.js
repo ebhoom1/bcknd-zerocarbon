@@ -277,7 +277,8 @@ const login = async (req, res) => {
     });
     console.log("Login successful");
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Login Error:", error.message);
+    res.status(500).json({ message: error.message });
   }
 };
 

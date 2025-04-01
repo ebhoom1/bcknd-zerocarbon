@@ -4,13 +4,13 @@ const sendEmail = async ({ to, subject, html }) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "anusreee2912@gmail.com", // your gmail
-      pass:"knorbaopdxlvmqsh", // your app password
+      user: process.env.EMAIL_USER, // your gmail
+      pass:process.env.EMAIL_PASS, // your app password
     },
   });
 
   const mailOptions = {
-    from: `"Ebhoom ESG Support" <"info.ebhoom@gmail.com">`,
+    from: `"Ebhoom ESG Support" <${process.env.EMAIL_USER}>`,
     to,
     subject,
     html,
