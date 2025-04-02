@@ -3,7 +3,9 @@ const User=require("../models/User");
 
 const getregisteredusers = async (req, res, next) => {
   try {
-    const users = await User.find({ userType: "user" });
+    const users = await User.find({
+      userType: { $in: ["user", "consultantadmin"] },
+    });
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ message: "Error fetching forms", error });

@@ -5,13 +5,7 @@ const Form = require("../models/Form");
 const { sendMail } = require("../utils/mail");
 const sendEmail = require("../utils/MailafterRegister/sendMail");
 
-
-// // Parse ALLOWED_ADMIN_EMAILS from environment variables
-// const allowedAdminEmails = process.env.ALLOWED_ADMIN_EMAILS
-//   ? process.env.ALLOWED_ADMIN_EMAILS.split(",") // Split the string into an array
-//   : [];
-
-// const registerUser = async (req, res, next) => {
+// const registerUser = async (req, res) => {
 //   try {
 //     const {
 //       email,
@@ -21,41 +15,33 @@ const sendEmail = require("../utils/MailafterRegister/sendMail");
 //       userType,
 //       address,
 //       companyName,
+//       subscriptionPlan,
+//       paymentStatus,
+//       subscriptionStartDate,
+//       subscriptionEndDate,
 //     } = req.body;
-
-//     if (
-//       !email ||
-//       !password ||
-//       !contactNumber ||
-//       !userName ||
-//       !userType ||
-//       !address
-//     ) {
-//       return res
-//         .status(400)
-//         .json({ message: "Please provide all required fields" });
+// console.log("req,body:",req.body)
+//     // Check common required fields
+//     if (!email || !password || !contactNumber || !userName || !userType || !address || !companyName) {
+//       return res.status(400).json({ message: "Please provide all required fields" });
 //     }
 
-//     // If userType is admin, validate email
-//     if (userType === "admin") {
-//       if (!allowedAdminEmails.includes(email)) {
-//         return res
-//           .status(403)
-//           .json({ message: "You are not authorized to register as an admin" });
+
+//     // User-specific validation
+//     if (userType === "user") {
+//       if (!subscriptionPlan || !paymentStatus || !subscriptionStartDate || !subscriptionEndDate) {
+//         return res.status(400).json({ message: "Subscription details are required for user type 'user'" });
 //       }
 //     }
 
-//     // Check if email already exists
 //     const existingUser = await User.findOne({ email });
 //     if (existingUser) {
 //       return res.status(409).json({ message: "Email already in use" });
 //     }
 
-//     // Hash password
 //     const hashedPassword = bcrypt.hashSync(password, 10);
 
-//     // Create a new user
-//     const user = new User({
+//     const newUser = new User({
 //       email,
 //       password: hashedPassword,
 //       contactNumber,
@@ -63,26 +49,68 @@ const sendEmail = require("../utils/MailafterRegister/sendMail");
 //       userType,
 //       address,
 //       companyName,
-//       isFirstLogin: true, // Default to true, can be updated on first login
+//       isFirstLogin: true,
+//       subscription: userType === "user" ? {
+//         plan: subscriptionPlan,
+//         status: paymentStatus,
+//         startDate: subscriptionStartDate,
+//         endDate: subscriptionEndDate,
+//       } : undefined, // don't include subscription for admin
 //     });
 
-//     await user.save();
-//     res.status(201).json({ message: "User registered successfully" });
+//     await newUser.save();
+// // Send welcome email with plan details
+// // if (userType === "user") {
+// //   const formattedStart = new Date(subscriptionStartDate).toLocaleDateString();
+// //   const formattedEnd = new Date(subscriptionEndDate).toLocaleDateString();
+
+// //   const htmlContent = `
+// //     <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: auto;">
+// //       <h2 style="color: #219653;">Welcome to Ebhoom ESG, ${userName}!</h2>
+// //       <p>Thank you for registering with us. We're excited to have you on board 🌱</p>
+      
+// //       <h3 style="color: #2F80ED;">Your Subscription Details:</h3>
+// //       <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+// //         <tr>
+// //           <td style="padding: 8px; font-weight: bold;">Plan</td>
+// //           <td style="padding: 8px;">${subscriptionPlan}</td>
+// //         </tr>
+// //         <tr>
+// //           <td style="padding: 8px; font-weight: bold;">Status</td>
+// //           <td style="padding: 8px;">${paymentStatus}</td>
+// //         </tr>
+// //         <tr>
+// //           <td style="padding: 8px; font-weight: bold;">Start Date</td>
+// //           <td style="padding: 8px;">${formattedStart}</td>
+// //         </tr>
+// //         <tr>
+// //           <td style="padding: 8px; font-weight: bold;">End Date</td>
+// //           <td style="padding: 8px;">${formattedEnd}</td>
+// //         </tr>
+// //       </table>
+
+// //       <p>If you have any questions or need help, feel free to reply to this email.</p>
+
+// //       <p style="margin-top: 30px;">Warm regards,<br/>Team Ebhoom ESG</p>
+// //     </div>
+// //   `;
+
+// //   await sendEmail({
+// //     to: email,
+// //     subject: "Welcome to Ebhoom ESG - Subscription Confirmation",
+// //     html: htmlContent,
+// //   });
+// // }
+
+//     res.status(200).json({ message: "User registered successfully" });
 //   } catch (error) {
-//     res
-//       .status(500)
-//       .json({ error: error.message, message: "Registration Failed" });
+//     res.status(500).json({ error: error.message, message: "Registration Failed" });
 //   }
 // };
 
-// Parse ALLOWED_ADMIN_EMAILS from environment variables
-const allowedAdminEmails = process.env.ALLOWED_ADMIN_EMAILS
-  ? process.env.ALLOWED_ADMIN_EMAILS.split(",")
-  : [];
-
 const registerUser = async (req, res) => {
   try {
-    const {
+    let {
       email,
       password,
       contactNumber,
@@ -95,23 +123,32 @@ const registerUser = async (req, res) => {
       subscriptionStartDate,
       subscriptionEndDate,
     } = req.body;
-console.log("req,body:",req.body)
-    // Check common required fields
-    if (!email || !password || !contactNumber || !userName || !userType || !address || !companyName) {
-      return res.status(400).json({ message: "Please provide all required fields" });
-    }
 
-    // Admin-specific validation
-    if (userType === "admin") {
-      if (!allowedAdminEmails.includes(email)) {
-        return res.status(403).json({ message: "You are not authorized to register as an admin" });
-      }
+    console.log("req.body:", req.body);
+
+    // Map userType for specific cases
+    if (userType === "Company") userType = "user";
+    if (userType === "Consultant") userType = "consultantadmin";
+
+    // Check common required fields
+    if (
+      !email ||
+      !password ||
+      !contactNumber ||
+      !userName ||
+      !userType ||
+      !address ||
+      !companyName
+    ) {
+      return res.status(400).json({ message: "Please provide all required fields" });
     }
 
     // User-specific validation
     if (userType === "user") {
       if (!subscriptionPlan || !paymentStatus || !subscriptionStartDate || !subscriptionEndDate) {
-        return res.status(400).json({ message: "Subscription details are required for user type 'user'" });
+        return res
+          .status(400)
+          .json({ message: "Subscription details are required for user type 'user'" });
       }
     }
 
@@ -131,12 +168,15 @@ console.log("req,body:",req.body)
       address,
       companyName,
       isFirstLogin: true,
-      subscription: userType === "user" ? {
-        plan: subscriptionPlan,
-        status: paymentStatus,
-        startDate: subscriptionStartDate,
-        endDate: subscriptionEndDate,
-      } : undefined, // don't include subscription for admin
+      subscription:
+        userType === "user"
+          ? {
+              plan: subscriptionPlan,
+              status: paymentStatus,
+              startDate: subscriptionStartDate,
+              endDate: subscriptionEndDate,
+            }
+          : undefined,
     });
 
     await newUser.save();
@@ -183,11 +223,81 @@ if (userType === "user") {
   });
 }
 
-    res.status(200).json({ message: "User registered successfully" });
-  } catch (error) {
-    res.status(500).json({ error: error.message, message: "Registration Failed" });
+    
+res.status(200).json({ message: "User registered successfully" });
+} catch (error) {
+  console.log("error",error.message);
+  res.status(500).json({ error: error.message, message: "Registration Failed" });
+}
+};
+
+
+const registerConsultantUser = async (req, res) => {
+  try {
+    const {
+      email,
+      password,
+      contactNumber,
+      userName,
+      address,
+      companyName,
+      consultantAdminId,
+      subscriptionPlan,
+      paymentStatus,
+      subscriptionStartDate,
+      subscriptionEndDate,
+    } = req.body;
+
+    // Validate required fields
+    if (
+      !email ||
+      !password ||
+      !contactNumber ||
+      !userName ||
+      !address ||
+      !companyName ||
+      !consultantAdminId ||
+      !subscriptionPlan ||
+      !paymentStatus ||
+      !subscriptionStartDate ||
+      !subscriptionEndDate
+    ) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    // Check if email already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json({ message: "Email already in use" });
+    }
+
+    const hashedPassword = bcrypt.hashSync(password, 10);
+
+    const newUser = new User({
+      email,
+      password: hashedPassword,
+      contactNumber,
+      userName,
+      userType: "user",
+      address,
+      companyName,
+      consultantAdminId,
+      subscription: {
+        plan: subscriptionPlan,
+        status: paymentStatus,
+        startDate: subscriptionStartDate,
+        endDate: subscriptionEndDate,
+      },
+    });
+
+    await newUser.save();
+
+    res.status(200).json({ message: "User registered under consultant successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Registration failed", error: err.message });
   }
 };
+
 
 
 // const login = async (req, res, next) => {
@@ -319,7 +429,7 @@ const updatePassword = async (req, res) => {
 const getUsersWithUserTypeUser = async (req, res) => {
   try {
     const users = await User.find({ userType: "user" });
-
+console.log("users:",users)
     if (!users.length) {
       return res.status(404).json({
         message: "No users with userType 'user' found.",
@@ -393,6 +503,7 @@ const formSubmission = async (req, res) => {
 
 module.exports = {
   registerUser,
+  registerConsultantUser,
   login,
   updatePassword,
   formSubmission,

@@ -59,7 +59,7 @@ const userSchema = new mongoose.Schema({
   },
   userType: {
     type: String,
-    enum: ["user", "admin"],
+    enum: ["user", "admin","consultantadmin"],
     required: true,
   },
   address: {
@@ -75,6 +75,11 @@ const userSchema = new mongoose.Schema({
     default: true,
   },
   subscription: subscriptionSchema, // Optional for admin
+  consultantAdminId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User", // Refers to the consultantadmin user
+    default: null,
+  }
 }, {
   timestamps: true,
 });
