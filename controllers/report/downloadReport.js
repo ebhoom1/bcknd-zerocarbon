@@ -33,9 +33,15 @@ exports.downloadReport = async (req, res) => {
 
     const htmlPath = path.join(reportsDir, `BRSR_Report_${userId}.html`);
     fs.writeFileSync(htmlPath, htmlContent, "utf-8");
+    console.log("Reports dir exists?", fs.existsSync(reportsDir));
 
     // Launch Puppeteer and generate PDF
-    const browser = await puppeteer.launch({ headless: "new" });
+    // const browser = await puppeteer.launch({ headless: "new" });
+    const browser = await puppeteer.launch({
+      headless: "new",
+      args: ["--no-sandbox", "--disable-setuid-sandbox"]
+    });    
+    
     const page = await browser.newPage();
     await page.setContent(htmlContent, { waitUntil: "load" });
 
@@ -72,7 +78,7 @@ exports.downloadReport = async (req, res) => {
         else console.log("✅ HTML deleted after sending.");
       });
     });
-    
+
   } catch (error) {
     console.error("❌ Error generating Section A PDF:", error);
     res.status(500).json({ error: "Failed to generate Section A PDF" });
