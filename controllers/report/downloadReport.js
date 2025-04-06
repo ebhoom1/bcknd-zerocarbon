@@ -6,7 +6,7 @@ const Submission = require("../../models/Submission");
 const Form = require("../../models/Form");
 const generalGuidanceHTML = require("../../utils/report/generalGuidance"); 
 
-exports.downloadSectionAReport = async (req, res) => {
+exports.downloadReport = async (req, res) => {
   try {
     const { userId } = req.params;
 
@@ -54,7 +54,25 @@ exports.downloadSectionAReport = async (req, res) => {
     await browser.close();
 
     // Send the file
-    res.download(pdfPath);
+    // res.download(pdfPath);
+    res.download(pdfPath, (err) => {
+      if (err) {
+        console.error("❌ Error sending PDF:", err);
+      }
+    
+      // Delete the PDF after download
+      fs.unlink(pdfPath, (err) => {
+        if (err) console.error("❌ Error deleting PDF:", err);
+        else console.log("✅ PDF deleted after sending.");
+      });
+    
+      // Delete the temporary HTML file too
+      fs.unlink(htmlPath, (err) => {
+        if (err) console.error("❌ Error deleting HTML:", err);
+        else console.log("✅ HTML deleted after sending.");
+      });
+    });
+    
   } catch (error) {
     console.error("❌ Error generating Section A PDF:", error);
     res.status(500).json({ error: "Failed to generate Section A PDF" });

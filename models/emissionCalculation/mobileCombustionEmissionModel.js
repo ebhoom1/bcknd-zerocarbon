@@ -10,6 +10,7 @@ const EmissionDetailsSchema = new mongoose.Schema({
 
 const MobileCombustionEmissionSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  month: { type: String},
   totalvehicles: { type: String },
   vehicletype: { type: String },
   vehiclename: { type: String },

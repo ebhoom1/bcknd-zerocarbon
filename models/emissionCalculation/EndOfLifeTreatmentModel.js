@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const EndOfLifeTreatmentSchema = new mongoose.Schema(
   {
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    month:{type:String},
     product: { type: String, required: true },
     method: { type: String, required: true },
     percentage: { type: Number, required: true },

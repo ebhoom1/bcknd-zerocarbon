@@ -10,6 +10,7 @@ const EmissionSchema = new mongoose.Schema({
 
 const StationaryCombustionEmissionSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  month:{type:String},
   fuelType: String,
   fuelUnit: String,
   annualFuelConsumption: Number,

@@ -16,6 +16,7 @@ const EmissionSchema = new mongoose.Schema({
 
 const IndustrialProcessesEmissionSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  month:{type:String},
   industryType: String,
   emissionSource: String,
   unit: String,

@@ -10,6 +10,7 @@ const EmissionSchema = new mongoose.Schema({
 
 const FugitiveEmissionSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  month:{type:String},
   category: String, // Refrigerant Emission / Pipeline Leak Emission
   gasType: String,
   emissionSource: String,

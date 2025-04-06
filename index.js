@@ -10,9 +10,7 @@ const userR = require("./router/userR");
 const adminR = require("./router/adminR");
 const authR = require("./router/authR");
 const flowchartR = require("./router/flowchartR");
-const EmissionFactorRoute = require("./router/EmissionFactor");
 const gwpRoutes = require("./router/gwpRoutes");
-const fuelCombustionRoutes = require("./router/fuelCombustionRoutes");
 const CountryemissionFactorRouter = require("./router/countryemissionFactorRouter");
 const mobileCombustionRoutes = require('./router/mobileCombustionRoutes');
 const industrialProcessRoutes = require('./router/industrialProcessRoutes');
@@ -26,11 +24,8 @@ const renewableEnergyCalculate=require('./router/renewableEnergyCalculateR')
 const emissionReductionSimulator=require('./router/emissionReductionSimulator');
 const reportRoutes = require("./router/reportRoutes");
 const emissionCalculation=require('./router/EmissionCalculation/emissionCalculationRoutes');
+const userdashboardRoutes=require("./router/userDashboard/dashboard");
 
-
-const CalculationDataOfEmissionC02eRouter = require("./router/CalculationDataOfEmissionC02eRoute");
-const CalculateEmissionCO2eRouter = require("./router/CalculateEmissionCO2eRoute");
-const TotalEmissionCO2eControllerRouter = require("./router/TotalEmissionCO2eControllerRoute");
 
 dotenv.config();
 
@@ -52,9 +47,7 @@ app.use("/api/user", userR);
 app.use("/api/admin", adminR);
 app.use("/api/auth", authR);
 app.use("/api/flowchart", flowchartR);
-app.use("/api", EmissionFactorRoute);
 app.use("/api/gwp", gwpRoutes);
-app.use("/api/fuelCombustion", fuelCombustionRoutes);
 app.use("/api/country-emission-factors", CountryemissionFactorRouter);
 app.use('/api/mobile-combustion', mobileCombustionRoutes);
 app.use('/api/industrial-processes', industrialProcessRoutes);
@@ -69,11 +62,9 @@ app.use("/api/renewable-energy",renewableEnergyCalculate);
 app.use("/api/emissions-reduction",emissionReductionSimulator);
 app.use("/api", reportRoutes);
 app.use("/api",emissionCalculation)
+app.use("/api",userdashboardRoutes)
 
 
-app.use("/api", CalculationDataOfEmissionC02eRouter);
-app.use("/api", CalculateEmissionCO2eRouter);
-app.use("/api", TotalEmissionCO2eControllerRouter);
 
 app.get("/", (req, res) => {
     res.send("Backend is running!");

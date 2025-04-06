@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 const PurchasedGoodsServicesSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  month:{type:String},
   material: { type: String, required: true },
   quantity: { type: Number, required: true },
   quantityUnit: { type: String, enum: ["Kg", "Unit"], required: true },

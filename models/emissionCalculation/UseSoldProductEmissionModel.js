@@ -6,6 +6,7 @@ const useSoldProductEmissionSchema = new mongoose.Schema({
     ref: "User",
     required: true
   },
+  month:{type:String},
   productName: {
     type: String,
     required: true

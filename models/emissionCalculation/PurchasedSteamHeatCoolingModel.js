@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const PurchasedSteamHeatCoolingSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  month:{type:String},
   consumption: { type: Number, required: true }, 
   unit: { type: String, required: true }, // GJ or MWh
   emissionFactor: { type: Number, required: true }, // kg CO2e per unit
