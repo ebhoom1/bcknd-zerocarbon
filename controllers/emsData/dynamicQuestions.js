@@ -3,7 +3,7 @@ const UserSurvey = require("../../models/survey/SurveyQuestionModel");
 
 exports.addDynamicQuestion = async (req, res) => {
   try {
-    const { userId, userName, question, section, options } = req.body;
+    const { userId, companyName, question, section, options } = req.body;
 
     const userSurvey = await UserSurvey.findOneAndUpdate(
       { userId },
@@ -15,7 +15,7 @@ exports.addDynamicQuestion = async (req, res) => {
             options,
           }
         },
-        $setOnInsert: { userName }
+        $setOnInsert: { companyName }
       },
       { new: true, upsert: true }
     );
