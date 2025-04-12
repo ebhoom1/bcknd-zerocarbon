@@ -1,0 +1,49 @@
+// controller/userSurveyController.js
+const UserSurvey = require("../../models/survey/SurveyQuestionModel");
+
+exports.addDynamicQuestion = async (req, res) => {
+  try {
+    const { userId, userName, question, section, options } = req.body;
+
+    const userSurvey = await UserSurvey.findOneAndUpdate(
+      { userId },
+      {
+        $push: {
+          dynamicQuestions: {
+            question,
+            section,
+            options,
+          }
+        },
+        $setOnInsert: { userName }
+      },
+      { new: true, upsert: true }
+    );
+
+    res.status(200).json({ message: "Question added", data: userSurvey });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+
+exports.getSurveyQuestionsByUserName = async (req, res) => {
+    try {
+      const { userName } = req.params;
+  
+      const survey = await UserSurvey.findOne({ userName });
+  
+      if (!survey) {
+        return res.status(404).json({ message: "Survey not found for this user" });
+      }
+  
+      res.status(200).json({
+        message:"survey questions get successfully",
+        staticQuestions: survey.staticQuestions,
+        dynamicQuestions: survey.dynamicQuestions,
+      });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  };
+  

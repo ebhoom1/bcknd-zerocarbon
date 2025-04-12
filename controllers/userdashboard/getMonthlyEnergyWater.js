@@ -44,7 +44,6 @@ const getMonthlyEnergyWater = async (req, res) => {
       });
     }
 
-    console.log("✅ Energy-Water Value:", yearData);
     return res.status(200).json({ success: true, data: yearData });
 
   } catch (err) {

@@ -25,7 +25,9 @@ const emissionReductionSimulator=require('./router/emissionReductionSimulator');
 const reportRoutes = require("./router/reportRoutes");
 const emissionCalculation=require('./router/EmissionCalculation/emissionCalculationRoutes');
 const userdashboardRoutes=require("./router/userDashboard/dashboard");
-
+const governanceUploadsecSubmission=require("./router/governanceUploadsecSubmissionoutes/governanceRoutes")
+const additionalDataWater=require("./router/emsData/waterRoutes")
+const addDynamicQuestion=require("./router/surveyQuestion/surveyQuestionRoutes")
 
 dotenv.config();
 
@@ -63,6 +65,9 @@ app.use("/api/emissions-reduction",emissionReductionSimulator);
 app.use("/api", reportRoutes);
 app.use("/api",emissionCalculation)
 app.use("/api",userdashboardRoutes)
+app.use("/api",governanceUploadsecSubmission);
+app.use("/api",additionalDataWater);
+app.use("/api",addDynamicQuestion);
 
 
 

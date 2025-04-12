@@ -36,8 +36,8 @@ exports.downloadReport = async (req, res) => {
     console.log("Reports dir exists?", fs.existsSync(reportsDir));
 
     // Launch Puppeteer and generate PDF
-    // const browser = await puppeteer.launch({ headless: "new" });
-    const browser = await puppeteer.launch({
+    // const browser = await puppeteer.launch({ headless: "new" }); //works in localhoast
+    const browser = await puppeteer.launch({  //works in production
       headless: "new",
       executablePath: "/snap/bin/chromium",
       args: ["--no-sandbox", "--disable-setuid-sandbox"]
