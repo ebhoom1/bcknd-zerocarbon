@@ -59,7 +59,7 @@ const seedStaticPerUser = async () => {
       if (!exists) {
         await UserSurvey.create({
           userId: user._id,
-          userName: user.userName,
+          companyName: user.companyName,
           staticQuestions: staticSections.flatMap(sec =>
             sec.questions.map(q => ({
               question: q.question,
@@ -68,7 +68,7 @@ const seedStaticPerUser = async () => {
           ),
           dynamicQuestions: []
         });
-        console.log(`Seeded for ${user.userName}`);
+        console.log(`Seeded for ${user.companyName}`);
       }
     }
 
