@@ -29,9 +29,9 @@ exports.addDynamicQuestion = async (req, res) => {
 
 exports.getSurveyQuestionsByUserName = async (req, res) => {
     try {
-      const { userName } = req.params;
+      const { companyName } = req.params;
   
-      const survey = await UserSurvey.findOne({ userName });
+      const survey = await UserSurvey.findOne({ companyName });
   
       if (!survey) {
         return res.status(404).json({ message: "Survey not found for this user" });
