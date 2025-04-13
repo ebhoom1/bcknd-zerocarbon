@@ -3,11 +3,11 @@ const Submission = require("../models/Submission");
 
 const {generateBRSRSectionAData}=require("../utils/report/generateBRSRSectionAData")
 
-// const { calculatePurchasedElectricity } = require("../utils/emissionCalculation/Scope2/calculatePurchasedElectricity");
-// const { calculatePurchasedSteamHeatCooling } = require("../utils/emissionCalculation/Scope2/calculatePurchasedSteamHeatCooling");
-// const { calculatePurchasedGoodsServicesEmission } = require("../utils/emissionCalculation/Scope3/calculatePurchasedGoods&ServicesEmission");
-// const { calculateUseOfSoldProducts } = require("../utils/emissionCalculation/Scope3/calculateUseOfSoldProducts");
-// const { calculateEndOfLifeTreatment } = require("../utils/emissionCalculation/Scope3/calculateEndOfLifeTreatment");
+const { calculatePurchasedElectricity } = require("../utils/emissionCalculation/Scope2/calculatePurchasedElectricity");
+const { calculatePurchasedSteamHeatCooling } = require("../utils/emissionCalculation/Scope2/calculatePurchasedSteamHeatCooling");
+const { calculatePurchasedGoodsServicesEmission } = require("../utils/emissionCalculation/Scope3/calculatePurchasedGoods&ServicesEmission");
+const { calculateUseOfSoldProducts } = require("../utils/emissionCalculation/Scope3/calculateUseOfSoldProducts");
+const { calculateEndOfLifeTreatment } = require("../utils/emissionCalculation/Scope3/calculateEndOfLifeTreatment");
 
 exports.submitData = async (req, res) => {
   try {
@@ -46,11 +46,11 @@ exports.submitData = async (req, res) => {
 
     // 🚀 Trigger Emission Calculations
   
-    // await calculatePurchasedElectricity(userId);
-    // await calculatePurchasedSteamHeatCooling(userId);
-    // await calculatePurchasedGoodsServicesEmission(userId);
-    // await calculateUseOfSoldProducts(userId);
-    // await calculateEndOfLifeTreatment(userId);
+    await calculatePurchasedElectricity(userId);
+    await calculatePurchasedSteamHeatCooling(userId);
+    await calculatePurchasedGoodsServicesEmission(userId);
+    await calculateUseOfSoldProducts(userId);
+    await calculateEndOfLifeTreatment(userId);
     await generateBRSRSectionAData(userId);
 
 
