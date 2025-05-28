@@ -1,3 +1,5 @@
+
+
 const PurchasedGoodsServicesModel = require("../../../models/emissionCalculation/PurchasedGoodsServicesModel");
 const UseSoldProductEmission = require("../../../models/emissionCalculation/UseSoldProductEmissionModel");
 const EndOfLifeTreatmentModel = require("../../../models/emissionCalculation/EndOfLifeTreatmentModel");
@@ -6,52 +8,42 @@ const calculateTotalScope3Emissions = async (req, res) => {
   try {
     const { userId } = req.params;
 
-    const total = {
-      CO2: 0,
-      CH4: 0,
-      N2O: 0,
-      CO2e: 0
+    const monthlyCO2e = {};
+
+    const accumulate = (records, getMonth, getCO2e) => {
+      records.forEach(record => {
+        const month = getMonth(record);
+        const value = parseFloat(getCO2e(record) || 0);
+        if (!monthlyCO2e[month]) monthlyCO2e[month] = 0;
+        monthlyCO2e[month] += value;
+      });
     };
 
-    // --- PURCHASED GOODS & SERVICES ---
+    // PURCHASED GOODS & SERVICES
     const purchasedGoods = await PurchasedGoodsServicesModel.find({ userId });
-    purchasedGoods.forEach(item => {
-      total.CO2 += parseFloat(item.emissionCO2 || 0);
-      total.CH4 += parseFloat(item.emissionCH4 || 0);
-      total.N2O += parseFloat(item.emissionN2O || 0);
-      total.CO2e += parseFloat(item.emissionCO2e || 0);
-    });
+    accumulate(purchasedGoods, r => r.month, r => r.emissionCO2e);
 
-    // --- USE OF SOLD PRODUCTS ---
+    // USE OF SOLD PRODUCTS
     const useSoldProducts = await UseSoldProductEmission.find({ userId });
-    useSoldProducts.forEach(item => {
-      total.CO2 += parseFloat(item.CO2 || 0);
-      total.CH4 += parseFloat(item.CH4 || 0);
-      total.N2O += parseFloat(item.N2O || 0);
-      total.CO2e += parseFloat(item.CO2e || 0);
-    });
+    accumulate(useSoldProducts, r => r.month, r => r.CO2e);
 
-    // --- END-OF-LIFE TREATMENT ---
+    // END OF LIFE TREATMENT
     const endOfLife = await EndOfLifeTreatmentModel.find({ userId });
-    endOfLife.forEach(item => {
-      total.CO2 += parseFloat(item.CO2 || 0);
-      total.CH4 += parseFloat(item.CH4 || 0);
-      total.N2O += parseFloat(item.N2O || 0);
-      total.CO2e += parseFloat(item.CO2e || 0);
+    accumulate(endOfLife, r => r.month, r => r.CO2e);
+
+    // Format results
+    const formattedMonthly = {};
+    Object.entries(monthlyCO2e).forEach(([month, value]) => {
+      formattedMonthly[month] = parseFloat(value.toFixed(3));
     });
 
     return res.status(200).json({
-      message: "Total Scope 3 emissions calculated successfully",
-      totalScope3Emissions: {
-        CO2: parseFloat(total.CO2.toFixed(3)),
-        CH4: parseFloat(total.CH4.toFixed(6)),
-        N2O: parseFloat(total.N2O.toFixed(6)),
-        CO2e: parseFloat(total.CO2e.toFixed(3))
-      }
+      message: "Monthly Scope 3 CO2e emissions calculated successfully",
+      monthlyScope3Emissions: formattedMonthly
     });
 
   } catch (error) {
-    console.error("Error calculating total Scope 3 emissions:", error);
+    console.error("Error calculating monthly Scope 3 CO2e:", error);
     return res.status(500).json({ message: "Internal server error", error: error.message });
   }
 };

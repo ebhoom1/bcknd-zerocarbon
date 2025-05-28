@@ -1,17 +1,25 @@
 const Form = require("../models/Form");
 const User=require("../models/User");
 
-const getregisteredusers = async (req, res, next) => {
+const getRegisteredUsers = async (req, res) => {
   try {
-    const users = await User.find({
-      userType: { $in: ["user", "consultantadmin"] },
-    });
+    const user = req.user;
+
+    let users;
+    if (user.userType === "superAdmin") {
+      users = await User.find({ userType: { $ne: "superAdmin" } }).select("-password");
+    } else if (user.userType === "admin") {
+      users = await User.find({ adminId: user._id }).select("-password");
+    } else {
+      return res.status(403).json({ message: "Access denied" });
+    }
+
     res.status(200).json(users);
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching forms", error });
+  } catch (err) {
+    console.error("Fetch users error:", err);
+    res.status(500).json({ message: "Server error" });
   }
 };
-
 
 
 const getFormById = async (req, res, next) => {
@@ -159,12 +167,60 @@ const getStatusCompleted = async (req, res, next) => {
   }
 };
 
+// Update user by ID
+const updateUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const updateData = { ...req.body };
+
+    // Hash password if present
+    if (updateData.password) {
+      updateData.password = bcrypt.hashSync(updateData.password, 10);
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
+      new: true,
+    });
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(updatedUser);
+  } catch (err) {
+    console.error("Update user error:", err.message);
+    res.status(500).json({ error: "Failed to update user" });
+  }
+};
+
+// Delete user by ID
+const deleteUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    const deleted = await User.findByIdAndDelete(userId);
+
+    if (!deleted) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ message: "User deleted successfully" });
+  } catch (err) {
+    console.error("Delete user error:", err.message);
+    res.status(500).json({ error: "Failed to delete user" });
+  }
+};
+
+
+
 module.exports = {
   getFormByFilter,
-  getregisteredusers,
+  getRegisteredUsers,
   getFormById,
   getDashboardMatrics,
   leadsStatus,
   updateUserSubscription,
   getStatusCompleted ,
+  updateUser,
+  deleteUser
 };

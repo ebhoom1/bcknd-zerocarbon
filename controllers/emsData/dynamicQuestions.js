@@ -13,6 +13,7 @@ exports.addDynamicQuestion = async (req, res) => {
             question,
             section,
             options,
+            type: "multiple-choice" // 👈 hardcoded for all dynamic questions
           }
         },
         $setOnInsert: { companyName }
@@ -20,7 +21,7 @@ exports.addDynamicQuestion = async (req, res) => {
       { new: true, upsert: true }
     );
 
-    res.status(200).json({ message: "Question added", data: userSurvey });
+    res.status(200).json({ message: "Dynamic question added successfully", data: userSurvey });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

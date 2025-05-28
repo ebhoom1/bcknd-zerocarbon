@@ -25,6 +25,7 @@ const emissionReductionSimulator=require('./router/emissionReductionSimulator');
 const reportRoutes = require("./router/reportRoutes");
 const emissionCalculation=require('./router/EmissionCalculation/emissionCalculationRoutes');
 const userdashboardRoutes=require("./router/userDashboard/dashboard");
+const admindashboardRoutes=require("./router/admindashboard/adminDashboardRoutes");
 const governanceUploadsecSubmission=require("./router/governanceUploadsecSubmissionoutes/governanceRoutes")
 const additionalDataWater=require("./router/emsData/waterRoutes")
 const addDynamicQuestion=require("./router/surveyQuestion/surveyQuestionRoutes")
@@ -65,26 +66,27 @@ app.use("/api/emissions-reduction",emissionReductionSimulator);
 app.use("/api", reportRoutes);
 app.use("/api",emissionCalculation)
 app.use("/api",userdashboardRoutes)
+app.use("/api",admindashboardRoutes)
 app.use("/api",governanceUploadsecSubmission);
 app.use("/api",additionalDataWater);
 app.use("/api",addDynamicQuestion);
 
 
 
-app.get("/", (req, res) => {
-    res.send("Backend is running!");
-});
+// app.get("/", (req, res) => {
+//     res.send("Backend is running!");
+// });
 
 // Connect to Database
 connectDB();
 
-// // Serve Static Files
-// app.use(express.static(path.join(__dirname, "build")));
+// Serve Static Files
+app.use(express.static(path.join(__dirname, "build")));
 
-// // Catch-All Route
-// app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname, "build", "index.html"));
-// });
+// Catch-All Route
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 // Start Server
 const PORT = process.env.PORT || 5000;

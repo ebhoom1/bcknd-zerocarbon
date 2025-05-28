@@ -1,31 +1,27 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const jwt = require("jsonwebtoken");
+const User = require("../models/User");
 
-// Middleware to authenticate the user based on the JWT token
-const authenticate = async (req, res, next) => {
-  // Get token from Authorization header
-  const token = req.header('Authorization')?.replace('Bearer ', '');
-console.log("token",token)
+const authMiddleware = async (req, res, next) => {
+  const authHeader = req.header("Authorization");
+  const token = authHeader?.startsWith("Bearer ") ? authHeader.split(" ")[1] : null;
+
   if (!token) {
-    return res.status(401).json({ message: 'No token, authorization denied' });
+    return res.status(401).json({ message: "No token, authorization denied" });
   }
 
   try {
-    // Verify the token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id).select("-password");
 
-    // Attach user info to req.user (i.e., the userId)
-    const user = await User.findById(decoded.id);
     if (!user) {
-      return res.status(401).json({ message: 'User not found' });
+      return res.status(401).json({ message: "User not found" });
     }
 
-    req.user = user;  // Add user information to req.user
-    console.log("req.user",req.user);
-    next(); // Proceed to the next middleware/route handler
+    req.user = user;
+    next();
   } catch (error) {
-    res.status(401).json({ message: 'Token is not valid' }); 
+    return res.status(401).json({ message: "Invalid token" });
   }
 };
 
-module.exports ={authenticate} 
+module.exports = authMiddleware;

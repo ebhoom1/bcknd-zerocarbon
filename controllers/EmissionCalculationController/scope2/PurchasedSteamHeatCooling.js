@@ -16,6 +16,7 @@ const getPurchasedSteamHeatCoolingEmission = async (req, res) => {
 
     const formatted = emissions.map((item, index) => ({
       serialNo: index + 1,
+      month:item.month,
       consumption: item.consumption,
       unit: item.unit,
       emissionFactor: item.emissionFactor,

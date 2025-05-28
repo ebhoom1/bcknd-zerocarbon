@@ -30,54 +30,47 @@ const subscriptionSchema = new mongoose.Schema({
   plan: {
     type: String,
     enum: ["Free Trial", "ESG Basic", "ESG Standard", "ESG Premium"],
+    required: true,
   },
   status: {
     type: String,
     enum: ["Free", "Paid", "Cancelled"],
+    required: true,
   },
-  startDate: Date,
-  endDate: Date,
+  startDate: {
+    type: Date,
+    required: true,
+  },
+  endDate: {
+    type: Date,
+    required: true,
+  },
 }, { _id: false });
 
 const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  contactNumber: {
-    type: String,
-    required: true,
-  },
-  userName: {
-    type: String,
-    required: true,
-  },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  contactNumber: { type: String, required: true },
+  userName: { type: String, required: true },
   userType: {
     type: String,
-    enum: ["user", "admin","consultantadmin"],
+    enum: ["user", "admin", "superAdmin"],
     required: true,
   },
-  address: {
-    type: String,
-    required: true,
+  address: { type: String, required: true },
+  companyName: { type: String, required: true },
+  isFirstLogin: { type: Boolean, default: true },
+
+  // Subscription is only required for user accounts
+  subscription: {
+    type: subscriptionSchema,
+    default: null,
   },
-  companyName: {
-    type: String,
-    required: true,
-  },
-  isFirstLogin: {
-    type: Boolean,
-    default: true,
-  },
-  subscription: subscriptionSchema, // Optional for admin
-  consultantAdminId: {
+
+  // Refers to the admin (or consultant) who created the user
+  adminId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // Refers to the consultantadmin user
+    ref: "User",
     default: null,
   }
 }, {

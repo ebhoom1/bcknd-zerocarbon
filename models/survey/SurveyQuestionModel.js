@@ -2,8 +2,9 @@ const mongoose = require("mongoose");
 
 const QuestionSchema = new mongoose.Schema({
   question: { type: String, required: true },
-  options: [String],         // Only used for multiple-choice type questions
-  section: { type: String }, // Helps in grouping (optional for dynamic)
+  section: { type: String },
+  type: { type: String, enum: ['text', 'boolean', 'number', 'multiple-choice'], required: true },
+  options: [String], // Only used if type is multiple-choice
 });
 
 const UserSurveySchema = new mongoose.Schema({

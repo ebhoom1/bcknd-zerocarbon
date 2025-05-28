@@ -1,4 +1,5 @@
 const SectionB = require('../../models/report/sectionBsubmission');
+const {generateBRSRSectionBData}=require("../../utils/report/generateBRSRSectionBData");
 
 // Save or update Section B submission
 exports.saveSectionB = async (req, res) => {
@@ -14,7 +15,7 @@ exports.saveSectionB = async (req, res) => {
       submission = new SectionB({ userId, ...data });
       await submission.save();
     }
-
+await generateBRSRSectionBData(userId)
     res.status(200).json({ success: true, message: 'Section B saved successfully', data: submission });
   } catch (error) {
     console.error('Error saving Section B:', error);

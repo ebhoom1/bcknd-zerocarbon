@@ -51,6 +51,7 @@ exports.submitData = async (req, res) => {
     await calculatePurchasedGoodsServicesEmission(userId);
     await calculateUseOfSoldProducts(userId);
     await calculateEndOfLifeTreatment(userId);
+    
     await generateBRSRSectionAData(userId);
 
 
@@ -80,6 +81,7 @@ exports.getUserSubmission = async (req, res) => {
     res.status(500).json({ error: "Server Error: Unable to fetch data" });
   }
 };
+
 
 //  GET ALL SUBMISSIONS (ADMIN USE-CASE)
 exports.getAllSubmissions = async (req, res) => {

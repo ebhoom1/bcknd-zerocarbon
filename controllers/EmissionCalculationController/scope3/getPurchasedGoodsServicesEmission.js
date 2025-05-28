@@ -16,6 +16,7 @@ const getPurchasedGoodsServicesEmission = async (req, res) => {
 
     const formatted = emissions.map((item, index) => ({
       serialNo: index + 1,
+      month:item.month,
       material: item.material,
       quantity: `${item.quantity} ${item.quantityUnit}`,
       emissionFactorCO2: `${item.emissionFactorCO2} kg CO₂`,

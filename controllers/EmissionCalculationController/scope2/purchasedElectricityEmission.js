@@ -19,6 +19,7 @@ const getPurchasedElectricityEmission = async (req, res) => {
     // ✅ Format the response for frontend
     const formatted = emissions.map((item, index) => ({
       serialNo: index + 1,
+      month:item.month,
       electricityConsumptionKWh: item.electricityConsumptionKWh,
       emissionFactor: item.emissionFactor,
       emissionKgCO2e: item.emissionKgCO2e.toFixed(2),

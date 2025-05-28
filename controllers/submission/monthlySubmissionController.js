@@ -37,3 +37,21 @@ await calculateMonthlyEndOfLifeTreatment(userId);
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
+
+
+// GET Monthly USER SUBMISSION (BY USER ID)
+exports.getMonthlyUserSubmission = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const submission = await MonthlySubmission.findOne({ userId });
+
+    if (!submission) {
+      return res.status(404).json({ message: "No submission found for this user" });
+    }
+
+    res.status(200).json(submission);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server Error: Unable to fetch data" });
+  }
+};

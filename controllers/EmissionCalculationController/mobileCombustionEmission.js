@@ -16,6 +16,7 @@ const getMobileCombustionEmissionData = async (req, res) => {
 
     const formattedData = emissions.map((item) => ({
       userId: item.userId,
+      month:item.month,
       totalvehicles: item.totalvehicles,
       vehicletype: item.vehicletype,
       vehiclename: item.vehiclename,
