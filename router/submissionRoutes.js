@@ -5,17 +5,14 @@ const renewableproject=require('../controllers/renewableProjectController');
 const { submitMonthlyEnvironment,getMonthlyUserSubmission } = require("../controllers/submission/monthlySubmissionController");
 
 
-
-
 router.post("/submit", submissionController.submitData);
 router.post("/monthly-submission", submitMonthlyEnvironment);
-router.post("/submissions/:userId", getMonthlyUserSubmission);
+// router.post("/submissions/:userId/", getMonthlyUserSubmission);
+router.get("/monthly-submission/:userId/:month", getMonthlyUserSubmission);
 router.post("/renewableproject/add", renewableproject.createProject);
 router.get("/renewableproject/get/:userId", renewableproject.getProjectById);
 router.get("/:userId", submissionController.getUserSubmission);
 router.get("/", submissionController.getAllSubmissions);
-
-
 
 module.exports = router;
 

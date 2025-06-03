@@ -13,6 +13,7 @@ const flowchartR = require("./router/flowchartR");
 const gwpRoutes = require("./router/gwpRoutes");
 const CountryemissionFactorRouter = require("./router/countryemissionFactorRouter");
 const mobileCombustionRoutes = require('./router/mobileCombustionRoutes');
+const stationaryRoutes = require('./router/stationaryCombustionRoutes');
 const industrialProcessRoutes = require('./router/industrialProcessRoutes');
 const fugitiveEmissionsRoutes=require('./router/fugitiveEmissionsRoutes');
 const endOfLifeTreatmentRoutes = require('./router/endOfLifeTreatmentRoutes');
@@ -29,6 +30,8 @@ const admindashboardRoutes=require("./router/admindashboard/adminDashboardRoutes
 const governanceUploadsecSubmission=require("./router/governanceUploadsecSubmissionoutes/governanceRoutes")
 const additionalDataWater=require("./router/emsData/waterRoutes")
 const addDynamicQuestion=require("./router/surveyQuestion/surveyQuestionRoutes")
+const griRoutes = require("./router/GRIrouter/griRoutes");
+const griReportRoutes = require("./router/GRIrouter/GRIReportRoutes");
 
 dotenv.config();
 
@@ -53,6 +56,7 @@ app.use("/api/flowchart", flowchartR);
 app.use("/api/gwp", gwpRoutes);
 app.use("/api/country-emission-factors", CountryemissionFactorRouter);
 app.use('/api/mobile-combustion', mobileCombustionRoutes);
+app.use('/api/stationary-combustion', stationaryRoutes);
 app.use('/api/industrial-processes', industrialProcessRoutes);
 app.use('/api/fugitive-emissions', fugitiveEmissionsRoutes);
 app.use('/api/purchasedgoodsservices', purchasedgoodsservicesR);
@@ -64,13 +68,14 @@ app.use("/api/analyse-roadmap",analyseDecarbonizationRoadmap);
 app.use("/api/renewable-energy",renewableEnergyCalculate);
 app.use("/api/emissions-reduction",emissionReductionSimulator);
 app.use("/api", reportRoutes);
-app.use("/api",emissionCalculation)
-app.use("/api",userdashboardRoutes)
-app.use("/api",admindashboardRoutes)
+app.use("/api",emissionCalculation);
+app.use("/api",userdashboardRoutes);
+app.use("/api",admindashboardRoutes);
 app.use("/api",governanceUploadsecSubmission);
 app.use("/api",additionalDataWater);
 app.use("/api",addDynamicQuestion);
-
+app.use("/api", griRoutes);
+app.use("/api", griReportRoutes);
 
 
 // app.get("/", (req, res) => {

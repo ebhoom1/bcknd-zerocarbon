@@ -7,7 +7,7 @@ const MonthlySubmissionSchema = new mongoose.Schema({
     type: Map,
     of: mongoose.Schema.Types.Mixed,
     // required: true
-  },
+  },  
   submittedAt: {
     type: Date,
     default: Date.now

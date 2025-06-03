@@ -213,6 +213,20 @@ const registerUser = async (req, res) => {
   }
 };
 
+const updateUserProfile = async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.json(updatedUser);
+  } catch (err) {
+    console.log("error update:",err);
+    res.status(500).json({ message: "Update failed", error: err.message });
+  }
+};
+
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -377,6 +391,7 @@ const formSubmission = async (req, res) => {
 
 module.exports = {
   registerUser,
+  updateUserProfile,
   login,
   updatePassword,
   formSubmission,

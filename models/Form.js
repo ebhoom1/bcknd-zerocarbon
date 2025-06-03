@@ -18,11 +18,11 @@ const formSchema = new mongoose.Schema({
     phone: { type: String },
   },
   industrySector: { type: String, required: true },
+  ownershipForm:{type:String,required:true},
   description: { type: String, required: true },
   operationalSites: { type: String, required: true },
   totalEmployees: { type: String, required: true },
   fiscalYear: { type: String, required: true },
-
   scope1: {
     stationaryCombustion: { type: Boolean, default: false },
     mobileSources: { type: Boolean, default: false },
