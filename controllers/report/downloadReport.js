@@ -942,7 +942,7 @@ exports.downloadReport = async (req, res) => {
     const htmlPath = path.join(reportsDir, `BRSR_Report_${userId}.html`);
     fs.writeFileSync(htmlPath, htmlContent, "utf-8");
 
-    // const browser = await puppeteer.launch({ headless: "new" });
+    // const browser = await puppeteer.launch({ headless: "new" });  //works in localhost
     const browser = await puppeteer.launch({  //works in production
       headless: "new",
       executablePath: "/snap/bin/chromium",

@@ -43,10 +43,7 @@ app.use(cors({
     origin: ["http://localhost:3000","https://esg.ebhoom.com"],
     credentials: true,
 }));
-// app.use(cors({
-//     origin: ["http://localhost:3000", "https://api.zerohero.ebhoom.com", "https://zerotohero.ebhoom.com"],
-//     credentials: true,
-// }));
+
 
 // Routes
 app.use("/api/user", userR);
@@ -74,7 +71,7 @@ app.use("/api",admindashboardRoutes);
 app.use("/api",governanceUploadsecSubmission);
 app.use("/api",additionalDataWater);
 app.use("/api",addDynamicQuestion);
-app.use("/api", griRoutes);
+// app.use("/api", griRoutes);
 app.use("/api", griReportRoutes);
 
 
