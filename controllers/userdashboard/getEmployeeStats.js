@@ -22,6 +22,7 @@ const getEmployeeStats = async (req, res) => {
           success: true,
           data: { totalEmployees, female, male, other }
         });
+        
       }
     }
 

@@ -57,7 +57,7 @@ const getCompanyScopeEmissions = async (req, res) => {
         }
       }
     }
-
+console.log("companyData:",companyData);
     res.status(200).json({ success: true, data: companyData });
   } catch (err) {
     console.error("❌ Error generating company emissions chart:", err);

@@ -313,7 +313,6 @@ const updatePassword = async (req, res) => {
 const getUsersWithUserTypeUser = async (req, res) => {
   try {
     const users = await User.find({ userType: "user" });
-    console.log("users:", users);
     if (!users.length) {
       return res.status(404).json({
         message: "No users with userType 'user' found.",

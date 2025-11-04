@@ -1,97 +1,118 @@
-// const Submission = require("../../../models/Submission");
+
+
+
+// const MonthlySubmission = require("../../../models/submission/MonthlySubmissionModel");
 // const UseSoldProductEmissionModel = require("../../../models/emissionCalculation/UseSoldProductEmissionModel");
 // const EmissionFactor = require("../../../models/contryEmissionFactorModel");
 // const UseSoldProductFactor = require("../../../models/useSoldProducts");
 
-// const calculateUseOfSoldProducts = async (userId) => {
+// const calculateMonthlyUseOfSoldProducts = async (userId) => {
 //   try {
-//     console.log("called")
-//     const submission = await Submission.findOne({ userId }).lean();
+//     const submissions = await MonthlySubmission.find({ userId });
 
-//     if (!submission || !submission.responses || !submission.responses["Scope3:ValueChainEmissions_UseofSoldProducts"]) {
-//       throw new Error("Use of Sold Products data not found");
+//     if (!submissions.length) {
+//       return { success: false, message: "No monthly submissions found." };
 //     }
 
-//     const useSoldProductArray = submission.responses["Scope3:ValueChainEmissions_UseofSoldProducts"];
 //     const countryEF = await EmissionFactor.findOne().sort({ createdAt: -1 }).lean();
 //     const energyEmissionFactor = parseFloat(countryEF?.emissionFactor || 0.971); // kg CO2/kWh
 
 //     const results = [];
 
-//     for (const data of useSoldProductArray) {
-//       const productName = data?.["UseofSoldProducts_Q1"];
-//       const unitsSold = parseInt(data?.["UseofSoldProducts_Q2"] || 0);
-//       const requiresEnergy = data?.["UseofSoldProducts_Q3"] === true || data?.["UseofSoldProducts_Q3"]?.toLowerCase() === "yes";
-//       const energyUsePerYear = parseFloat(data?.["UseofSoldProducts_Q4"] || 0);
-//       const lifetimeYears = parseFloat(data?.["UseofSoldProducts_Q5"] || 0);
+//     for (const sub of submissions) {
+//       const { month, responses } = sub;
+//       const useSoldProductArray = responses?.get("Scope3:ValueChainEmissions_UseofSoldProducts");
 
+//       if (!Array.isArray(useSoldProductArray) || useSoldProductArray.length === 0) continue;
 
-//       // Skip if unitsSold is not valid
-//       if (!productName || !unitsSold || isNaN(unitsSold) || unitsSold <= 0) continue;
+//       for (const data of useSoldProductArray) {
+//         const productName = data?.["UseofSoldProducts_Q1"];
+//         const unitsSold = parseInt(data?.["UseofSoldProducts_Q2"] || 0);
+//         const requiresEnergy =
+//           data?.["UseofSoldProducts_Q7"] === true ||
+//           data?.["UseofSoldProducts_Q7"]?.toLowerCase() === "yes";
+//         const energyUsePerYear = parseFloat(data?.["UseofSoldProducts_Q8"] || 0);
+//         const lifetimeYears = parseFloat(data?.["UseofSoldProducts_Q6"] || 0);
 
-//       const productFactor = await UseSoldProductFactor.findOne({ productService: productName }).lean();
+//         if (!productName || isNaN(unitsSold) || unitsSold <= 0) continue;
 
-//       let CO2 = 0, CH4 = 0, N2O = 0, CO2e = 0;
+//         const productFactor = await UseSoldProductFactor.findOne({ productService: productName }).lean();
 
-//       // CASE A: Factor-based emission
-//       if (productFactor) {
-//         CO2 = productFactor.CO2 * unitsSold;
-//         CH4 = productFactor.CH4 * unitsSold;
-//         N2O = productFactor.N2O * unitsSold;
-//         CO2e = productFactor.CO2e * unitsSold;
-//       }
+//         let CO2 = 0,
+//           CH4 = 0,
+//           N2O = 0,
+//           CO2e = 0;
 
-//       // CASE B: If energy required
-//       if (requiresEnergy && energyUsePerYear > 0 && lifetimeYears > 0) {
-//         const totalEnergy = unitsSold * energyUsePerYear * lifetimeYears;
-//         const additionalCO2 = totalEnergy * energyEmissionFactor;
-//         CO2 += additionalCO2;
-//         CO2e += additionalCO2;
-//       }
+//         // A. Static factor emissions
+//         if (productFactor) {
+//           CO2 = productFactor.CO2 * unitsSold;
+//           CH4 = productFactor.CH4 * unitsSold;
+//           N2O = productFactor.N2O * unitsSold;
+//           CO2e = productFactor.CO2e * unitsSold;
+//         }
 
-//       const duplicate = await UseSoldProductEmissionModel.findOne({
-//         userId,
-//         productName,
-//         unitsSold,
-//         CO2,
-//         CH4,
-//         N2O,
-//         CO2e
-//       }).lean();
+//         // B. Dynamic energy-based emissions
+//         if (requiresEnergy && energyUsePerYear > 0 && lifetimeYears > 0) {
+//           const totalEnergy = unitsSold * energyUsePerYear * lifetimeYears;
+//           const additionalCO2 = totalEnergy * energyEmissionFactor;
+//           CO2 += additionalCO2;
+//           CO2e += additionalCO2;
+//         }
 
-//       if (!duplicate) {
-//         const record = new UseSoldProductEmissionModel({
+//         const exists = await UseSoldProductEmissionModel.findOne({
 //           userId,
+//           month,
 //           productName,
 //           unitsSold,
-//           requiresEnergy,
-//           energyUsePerYear,
-//           lifetimeYears,
 //           CO2,
 //           CH4,
 //           N2O,
 //           CO2e
 //         });
-//         await record.save();
 
+//         if (!exists) {
+//           await UseSoldProductEmissionModel.create({
+//             userId,
+//             month,
+//             productName,
+//             unitsSold,
+//             requiresEnergy,
+//             energyUsePerYear,
+//             lifetimeYears,
+//             CO2,
+//             CH4,
+//             N2O,
+//             CO2e
+//           });
+//         }
+
+//         results.push({
+//           month,
+//           productName,
+//           unitsSold,
+//           requiresEnergy,
+//           CO2,
+//           CH4,
+//           N2O,
+//           CO2e
+//         });
 //       }
-
-//       results.push({ productName, unitsSold, CO2, CH4, N2O, CO2e });
 //     }
 
 //     return {
 //       success: true,
 //       data: results
 //     };
-
 //   } catch (err) {
-//     console.error("Use of Sold Products Emission Error:", err.message);
-//     return { success: false, message: err.message };
+//     console.error("calculateMonthlyUseOfSoldProducts error:", err.message);
+//     return {
+//       success: false,
+//       message: err.message
+//     };
 //   }
 // };
 
-// module.exports = { calculateUseOfSoldProducts };
-
+// module.exports = { calculateMonthlyUseOfSoldProducts };
 
 
 const MonthlySubmission = require("../../../models/submission/MonthlySubmissionModel");
@@ -99,109 +120,123 @@ const UseSoldProductEmissionModel = require("../../../models/emissionCalculation
 const EmissionFactor = require("../../../models/contryEmissionFactorModel");
 const UseSoldProductFactor = require("../../../models/useSoldProducts");
 
-const calculateMonthlyUseOfSoldProducts = async (userId) => {
+const getResponseBlock = (responses, key) =>
+  typeof responses?.get === "function" ? responses.get(key) : responses?.[key];
+
+const toNumber = (v, def = 0) => {
+  if (typeof v === "number" && Number.isFinite(v)) return v;
+  if (typeof v === "string") {
+    const t = v.trim().toLowerCase();
+    // common phrase: "Consumed within 1 year"
+    if (t.includes("within 1 year")) return 1;
+    const m = t.match(/-?\d+(\.\d+)?/);
+    if (m) return parseFloat(m[0]);
+  }
+  return def;
+};
+
+const isYes = (v) => (typeof v === "boolean" ? v : String(v || "").trim().toLowerCase() === "yes");
+
+/**
+ * Optional: add `month` to only recompute that month.
+ * Usage from controller: await calculateMonthlyUseOfSoldProducts(userId, month)
+ */
+const calculateMonthlyUseOfSoldProducts = async (userId, month = null) => {
   try {
-    const submissions = await MonthlySubmission.find({ userId });
+    const subQuery = month ? { userId, month } : { userId };
+    const submissions = await MonthlySubmission.find(subQuery);
 
     if (!submissions.length) {
       return { success: false, message: "No monthly submissions found." };
     }
 
+    // Grid EF (kg CO2/kWh). Fall back if missing.
     const countryEF = await EmissionFactor.findOne().sort({ createdAt: -1 }).lean();
-    const energyEmissionFactor = parseFloat(countryEF?.emissionFactor || 0.971); // kg CO2/kWh
+    const energyEmissionFactor = toNumber(countryEF?.emissionFactor, 0.971);
 
     const results = [];
 
     for (const sub of submissions) {
-      const { month, responses } = sub;
-      const useSoldProductArray = responses?.get("Scope3:ValueChainEmissions_UseofSoldProducts");
+      const { month: subMonth, responses } = sub;
+      const key = "Scope3:ValueChainEmissions_UseofSoldProducts";
+      const useSoldProductArray = getResponseBlock(responses, key);
 
       if (!Array.isArray(useSoldProductArray) || useSoldProductArray.length === 0) continue;
 
       for (const data of useSoldProductArray) {
-        const productName = data?.["UseofSoldProducts_Q1"];
-        const unitsSold = parseInt(data?.["UseofSoldProducts_Q2"] || 0);
-        const requiresEnergy =
-          data?.["UseofSoldProducts_Q7"] === true ||
-          data?.["UseofSoldProducts_Q7"]?.toLowerCase() === "yes";
-        const energyUsePerYear = parseFloat(data?.["UseofSoldProducts_Q8"] || 0);
-        const lifetimeYears = parseFloat(data?.["UseofSoldProducts_Q6"] || 0);
+        const productName = data?.["UseofSoldProducts_Q1"]?.trim();
+        const unitsSold = toNumber(data?.["UseofSoldProducts_Q2"], 0);
+        const requiresEnergy = isYes(data?.["UseofSoldProducts_Q7"]);
 
-        if (!productName || isNaN(unitsSold) || unitsSold <= 0) continue;
+        // Only parse these if energy is required
+        const energyUsePerYear = requiresEnergy ? toNumber(data?.["UseofSoldProducts_Q8"], 0) : 0;
+        const lifetimeYears   = requiresEnergy ? toNumber(data?.["UseofSoldProducts_Q6"], 1) : 0;
 
-        const productFactor = await UseSoldProductFactor.findOne({ productService: productName }).lean();
+        if (!productName || unitsSold <= 0) continue;
 
-        let CO2 = 0,
-          CH4 = 0,
-          N2O = 0,
-          CO2e = 0;
+        // product factor (case-insensitive match)
+        const productFactor = await UseSoldProductFactor.findOne({
+          productService: new RegExp(`^${productName}$`, "i"),
+        }).lean();
 
-        // A. Static factor emissions
+        let CO2 = 0, CH4 = 0, N2O = 0, CO2e = 0;
+
+        // A) Static factor emissions per unit
         if (productFactor) {
-          CO2 = productFactor.CO2 * unitsSold;
-          CH4 = productFactor.CH4 * unitsSold;
-          N2O = productFactor.N2O * unitsSold;
-          CO2e = productFactor.CO2e * unitsSold;
+          CO2 += toNumber(productFactor.CO2, 0)  * unitsSold;
+          CH4 += toNumber(productFactor.CH4, 0)  * unitsSold;
+          N2O += toNumber(productFactor.N2O, 0)  * unitsSold;
+          CO2e += toNumber(productFactor.CO2e, 0) * unitsSold;
         }
 
-        // B. Dynamic energy-based emissions
+        // B) Dynamic energy-based emissions (avoid NaN with our guards)
         if (requiresEnergy && energyUsePerYear > 0 && lifetimeYears > 0) {
-          const totalEnergy = unitsSold * energyUsePerYear * lifetimeYears;
-          const additionalCO2 = totalEnergy * energyEmissionFactor;
-          CO2 += additionalCO2;
-          CO2e += additionalCO2;
+          const totalEnergy = unitsSold * energyUsePerYear * lifetimeYears; // kWh
+          const additionalCO2 = totalEnergy * energyEmissionFactor;        // kg CO2
+          CO2  += additionalCO2;
+          CO2e += additionalCO2; // if EF is CO2-only; if you have CO2e per kWh, use that instead
         }
 
-        const exists = await UseSoldProductEmissionModel.findOne({
-          userId,
-          month,
-          productName,
-          unitsSold,
-          CO2,
-          CH4,
-          N2O,
-          CO2e
-        });
-
-        if (!exists) {
-          await UseSoldProductEmissionModel.create({
-            userId,
-            month,
-            productName,
-            unitsSold,
-            requiresEnergy,
-            energyUsePerYear,
-            lifetimeYears,
-            CO2,
-            CH4,
-            N2O,
-            CO2e
-          });
-        }
+        // Upsert by (userId, month, productName)
+        await UseSoldProductEmissionModel.updateOne(
+          { userId, month: subMonth, productName },
+          {
+            $set: {
+              userId,
+              month: subMonth,
+              productName,
+              unitsSold,
+              requiresEnergy,
+              energyUsePerYear,
+              lifetimeYears,
+              CO2,
+              CH4,
+              N2O,
+              CO2e,
+            },
+          },
+          { upsert: true }
+        );
 
         results.push({
-          month,
+          month: subMonth,
           productName,
           unitsSold,
           requiresEnergy,
+          energyUsePerYear,
+          lifetimeYears,
           CO2,
           CH4,
           N2O,
-          CO2e
+          CO2e,
         });
       }
     }
 
-    return {
-      success: true,
-      data: results
-    };
+    return { success: true, data: results };
   } catch (err) {
-    console.error("calculateMonthlyUseOfSoldProducts error:", err.message);
-    return {
-      success: false,
-      message: err.message
-    };
+    console.error("calculateMonthlyUseOfSoldProducts error:", err);
+    return { success: false, message: err.message };
   }
 };
 

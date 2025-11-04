@@ -9,37 +9,11 @@ const {calculateMonthlyUseOfSoldProducts }=require("../../utils/emissionCalculat
 const {calculateMonthlyPurchasedGoodsServices  }=require("../../utils/emissionCalculation/Scope3/calculatePurchasedGoods&ServicesEmission");
 const {calculateMonthlyEndOfLifeTreatment  }=require("../../utils/emissionCalculation/Scope3/calculateEndOfLifeTreatment");
 
-// exports.submitMonthlyEnvironment = async (req, res) => {
-//   try {
-//     const { userId, month, responses } = req.body;
-
-//     // Check for duplicate month entry
-//     const existing = await MonthlySubmission.findOne({ userId, month });
-//     if (existing) {
-//       return res.status(400).json({ message: "Data already submitted for this month." });
-//     }
-
-//     const saved = await MonthlySubmission.create({ userId, month, responses });
-// await calculateMonthlyMobileCombustion(userId);
-// await calculateMonthlyStationaryCombustion(userId);
-// await calculateMonthlyIndustrialProcesses(userId);
-// await calculateMonthlyFugitiveEmissions(userId);
-// await calculateMonthlyPurchasedElectricity(userId);
-// await calculateMonthlyPurchasedSteamHeatCooling(userId);
-// await calculateMonthlyUseOfSoldProducts(userId);
-// await calculateMonthlyPurchasedGoodsServices(userId);
-// await calculateMonthlyEndOfLifeTreatment(userId);
-
-//     res.status(200).json({ message: "Monthly environment data saved", data: saved });
-//   } catch (err) {
-//     console.error("Submission Error:", err);
-//     res.status(500).json({ message: "Server error", error: err.message });
-//   }
-// };
 
 exports.submitMonthlyEnvironment = async (req, res) => {
   try {
     const { userId, month, responses } = req.body;
+    console.log("responses:",responses);
 
     if (!userId || !month || !responses) {
       return res.status(400).json({ message: "userId, month, and responses are required." });
@@ -68,15 +42,15 @@ exports.submitMonthlyEnvironment = async (req, res) => {
     }
 
     // 🔁 Run only applicable emission calculations
-    if (responses["Scope1_MobileCombustion"]) await calculateMonthlyMobileCombustion(userId);
-    if (responses["Scope1_StationaryCombustion"]) await calculateMonthlyStationaryCombustion(userId);
-    if (responses["Scope1_IndustrialProcesses"]) await calculateMonthlyIndustrialProcesses(userId);
-    if (responses["Scope1_FugitiveEmissions"]) await calculateMonthlyFugitiveEmissions(userId);
-    if (responses["Scope2_PurchasedElectricity"]) await calculateMonthlyPurchasedElectricity(userId);
-    if (responses["Scope2_PurchasedSteamHeatorCooling"]) await calculateMonthlyPurchasedSteamHeatCooling(userId);
-    if (responses["Scope3_UseofSoldProducts"]) await calculateMonthlyUseOfSoldProducts(userId);
-    if (responses["Scope3_PurchasedGoodsServices"]) await calculateMonthlyPurchasedGoodsServices(userId);
-    if (responses["Scope3_EndofLifeTreatment"]) await calculateMonthlyEndOfLifeTreatment(userId);
+    if (responses["Scope1:DirectEmissions_MobileCombustion"]) await calculateMonthlyMobileCombustion(userId);
+    if (responses["Scope1:DirectEmissions_StationaryCombustion"]) await calculateMonthlyStationaryCombustion(userId);
+    if (responses["Scope1:DirectEmissions_IndustrialProcesses"]) await calculateMonthlyIndustrialProcesses(userId);
+    if (responses["Scope1:DirectEmissions_FugitiveEmissions"]) await calculateMonthlyFugitiveEmissions(userId);
+    if (responses["Scope2:IndirectEmissions_PurchasedElectricity"]) await calculateMonthlyPurchasedElectricity(userId);
+    if (responses["Scope2:IndirectEmissions_PurchasedSteamHeatorCooling"]) await calculateMonthlyPurchasedSteamHeatCooling(userId);
+    if (responses["Scope3:ValueChainEmissions_UseofSoldProducts"]) await calculateMonthlyUseOfSoldProducts(userId);
+    if (responses["Scope3:ValueChainEmissions_PurchasedGoodsServices"]) await calculateMonthlyPurchasedGoodsServices(userId);
+    if (responses["Scope3:ValueChainEmissions_EndofLifeTreatment"]) await calculateMonthlyEndOfLifeTreatment(userId);
 
     res.status(200).json({
       message: submission.isNew
