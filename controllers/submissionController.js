@@ -46,11 +46,11 @@ exports.submitData = async (req, res) => {
 
     // 🚀 Trigger Emission Calculations
   
-    await calculatePurchasedElectricity(userId);
-    await calculatePurchasedSteamHeatCooling(userId);
-    await calculatePurchasedGoodsServicesEmission(userId);
-    await calculateUseOfSoldProducts(userId);
-    await calculateEndOfLifeTreatment(userId);
+    // await calculatePurchasedElectricity(userId);
+    // await calculatePurchasedSteamHeatCooling(userId);
+    // await calculatePurchasedGoodsServicesEmission(userId);
+    // await calculateUseOfSoldProducts(userId);
+    // await calculateEndOfLifeTreatment(userId);
     
     await generateBRSRSectionAData(userId);
 

@@ -1,10 +1,11 @@
 const Submission = require("../../models/Submission");
+const MonthlySubmission = require("../../models/submission/MonthlySubmissionModel");
 const Form = require("../../models/Form");
 const BRSRSectionA = require("../../models/report/BRSRSectionA");
 
 async function generateBRSRSectionAData(userId) {
   const submission = await Submission.findOne({ userId });
-  if (!submission) return;
+  if (!MonthlySubmission || !submission) return;
 
   const formData = await Form.findOne({ userId });
 

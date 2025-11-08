@@ -1,4 +1,5 @@
 const MonthlySubmission = require("../../models/submission/MonthlySubmissionModel");
+const { generateBRSRSectionAData } = require("../../utils/report/generateBRSRSectionAData");
 const {calculateMonthlyMobileCombustion}=require("../../utils/emissionCalculation/calculateMobileCombustion");
 const {calculateMonthlyStationaryCombustion}=require("../../utils/emissionCalculation/calculateStationaryCombustion");
 const {calculateMonthlyIndustrialProcesses}=require("../../utils/emissionCalculation/calculateIndustrialProcesses");
@@ -51,6 +52,9 @@ exports.submitMonthlyEnvironment = async (req, res) => {
     if (responses["Scope3:ValueChainEmissions_UseofSoldProducts"]) await calculateMonthlyUseOfSoldProducts(userId);
     if (responses["Scope3:ValueChainEmissions_PurchasedGoodsServices"]) await calculateMonthlyPurchasedGoodsServices(userId);
     if (responses["Scope3:ValueChainEmissions_EndofLifeTreatment"]) await calculateMonthlyEndOfLifeTreatment(userId);
+
+await generateBRSRSectionAData(userId);
+
 
     res.status(200).json({
       message: submission.isNew

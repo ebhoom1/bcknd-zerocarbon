@@ -1,9 +1,37 @@
 // utils/report/generateSectionAHTML.js
-function generateSectionAHTML(data, responses, formData, questionsMap) {
-    const tableRows = data.map((row) => {
-      const key = row.report;
-      const sectionData = key === "form" ? null : responses.get(key);
-      let content = "";
+function generateSectionAHTML(data, responses,Monthlyresponses, formData, questionsMap) {
+  // console.log("responses from sectionA html:",responses);
+  // console.log("data from sectionA html:",data);
+
+  // Helper to fetch section data from Submission.responses or MonthlySubmission.responses
+  const getSectionData = (key) => {
+    if (!key || key === "form") return null;
+
+    let val = null;
+
+    if (responses) {
+      if (typeof responses.get === "function") {
+        val = responses.get(key);
+      } else {
+        val = responses[key];
+      }
+    }
+
+    if ((val === null || val === undefined) && Monthlyresponses) {
+      if (typeof Monthlyresponses.get === "function") {
+        val = Monthlyresponses.get(key);
+      } else {
+        val = Monthlyresponses[key];
+      }
+    }
+
+    return val;
+  };
+
+  const tableRows = data.map((row) => {
+    const key = row.report;
+    const sectionData = getSectionData(key);
+    let content = "";
   
       switch (row.qno) {
         case "14":
