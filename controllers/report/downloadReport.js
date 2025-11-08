@@ -37,8 +37,8 @@ exports.downloadReport = async (req, res) => {
     console.log("sectionCData:", sectionCData);
 
     // Build Section A data even if BRSRSectionA doc is missing/empty
-    const sectionAData = sectionA?.data||[];
-      
+    const sectionAData = sectionA?.data || [];
+
 
 
     const sectionBResponsesDoc = await SectionBSubmission.findOne({ userId });
@@ -116,12 +116,12 @@ exports.downloadReport = async (req, res) => {
     const htmlPath = path.join(reportsDir, `BRSR_Report_${userId}.html`);
     fs.writeFileSync(htmlPath, htmlContent, "utf-8");
 
-    const browser = await puppeteer.launch({ headless: "new" });  //works in localhost
-    // const browser = await puppeteer.launch({  //works in production
-    //   headless: "new",
-    //   executablePath: "/snap/bin/chromium",
-    //   args: ["--no-sandbox", "--disable-setuid-sandbox"]
-    // });
+    // const browser = await puppeteer.launch({ headless: "new" });  //works in localhost
+    const browser = await puppeteer.launch({  //works in production
+      headless: "new",
+      executablePath: "/snap/bin/chromium",
+      args: ["--no-sandbox", "--disable-setuid-sandbox"]
+    });
     const page = await browser.newPage();
     await page.setContent(htmlContent, { waitUntil: "load" });
 
