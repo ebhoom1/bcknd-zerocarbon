@@ -14,6 +14,17 @@ const { generateSectionAHTML } = require("../../utils/report/generateSectionAHTM
 const { generateSectionBHTML } = require("../../utils/report/generateSectionBHTML");
 const { generateSectionCHTML } = require("../../utils/report/generateSectionCHTML");
 
+const isProd = process.env.NODE_ENV === "production";
+const launchOptions = isProd
+  ? {
+      headless: "new",
+      executablePath: process.env.CHROMIUM_PATH || "/snap/bin/chromium",
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    }
+  : {
+      headless: "new", // local: use bundled Chromium, no executablePath
+    };
+
 exports.downloadReport = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -110,39 +121,65 @@ exports.downloadReport = async (req, res) => {
       </html>
     `;
 
-    const reportsDir = path.join(__dirname, "../../reports");
-    if (!fs.existsSync(reportsDir)) fs.mkdirSync(reportsDir, { recursive: true });
+    // const reportsDir = path.join(__dirname, "../../reports");
+    // if (!fs.existsSync(reportsDir)) fs.mkdirSync(reportsDir, { recursive: true });
 
-    const htmlPath = path.join(reportsDir, `BRSR_Report_${userId}.html`);
-    fs.writeFileSync(htmlPath, htmlContent, "utf-8");
+    // const htmlPath = path.join(reportsDir, `BRSR_Report_${userId}.html`);
+    // fs.writeFileSync(htmlPath, htmlContent, "utf-8");
 
-    // const browser = await puppeteer.launch({ headless: "new" });  //works in localhost
-    const browser = await puppeteer.launch({  //works in production
-      headless: "new",
-      executablePath: "/snap/bin/chromium",
-      args: ["--no-sandbox", "--disable-setuid-sandbox"]
-    });
+    // // const browser = await puppeteer.launch({ headless: "new" });  //works in localhost
+    // const browser = await puppeteer.launch({  //works in production
+    //   headless: "new",
+    //   executablePath: "/snap/bin/chromium",
+    //   args: ["--no-sandbox", "--disable-setuid-sandbox"]
+    // });
+    // const page = await browser.newPage();
+    // await page.setContent(htmlContent, { waitUntil: "load" });
+
+    // const pdfPath = path.join(reportsDir, `BRSR_Report_${userId}.pdf`);
+    // await page.pdf({
+    //   path: pdfPath,
+    //   format: "A4",
+    //   printBackground: true,
+    //   margin: { top: "40px", bottom: "40px" }
+    // });
+
+    // await browser.close();
+
+    // res.download(pdfPath, (err) => {
+    //   if (err) console.error("❌ Error sending PDF:", err);
+    //   fs.unlink(pdfPath, (err) => err && console.error("❌ Error deleting PDF:", err));
+    //   fs.unlink(htmlPath, (err) => err && console.error("❌ Error deleting HTML:", err));
+    // });
+     // 🔹 NEW: buffer-based PDF + env-aware launch
+    const browser = await puppeteer.launch(launchOptions);
     const page = await browser.newPage();
     await page.setContent(htmlContent, { waitUntil: "load" });
 
-    const pdfPath = path.join(reportsDir, `BRSR_Report_${userId}.pdf`);
-    await page.pdf({
-      path: pdfPath,
+    const pdfBuffer = await page.pdf({
       format: "A4",
       printBackground: true,
-      margin: { top: "40px", bottom: "40px" }
+      margin: { top: "40px", bottom: "40px" },
     });
 
     await browser.close();
 
-    res.download(pdfPath, (err) => {
-      if (err) console.error("❌ Error sending PDF:", err);
-      fs.unlink(pdfPath, (err) => err && console.error("❌ Error deleting PDF:", err));
-      fs.unlink(htmlPath, (err) => err && console.error("❌ Error deleting HTML:", err));
-    });
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename="BRSR_Report_${userId}.pdf"`
+    );
+    res.setHeader("Content-Length", pdfBuffer.length);
+
+    return res.send(pdfBuffer);
 
   } catch (error) {
-    console.error("❌ Error generating BRSR PDF:", error);
-    res.status(500).json({ error: "Failed to generate BRSR PDF" });
+   console.error("❌ Error generating BRSR PDF:", error);
+
+    // You can remove 'details' later; it's helpful now to see the real cause in prod.
+    res.status(500).json({
+      error: "Failed to generate BRSR PDF",
+      details: error.message,
+    });
   }
 };
